@@ -1,0 +1,34 @@
+{
+    "Students":[
+        {
+            "studentName": "Todd",
+            "studentGPA": "5.0",
+            "studentAddress":{
+                "streetNumber": "123 Main st",
+                "city": "Indy",
+                "state": "IN",
+                "zipcode": "47303"
+            }
+        },
+        {
+            "studentName": "Tara",
+            "studentGPA": "3.0",
+            "studentAddress":{
+                "streetNumber": "123 Main st",
+                "city": "Indy",
+                "state": "IN",
+                "zipcode": "47303"
+            }
+        },
+        {
+            "studentName": "Cas",
+            "studentGPA": "3.0",
+            "studentAddress":{
+                "streetNumber": "123 Main st",
+                "city": "Indy",
+                "state": "IN",
+                "zipcode": "47303"
+            }
+        }
+    ]
+}
