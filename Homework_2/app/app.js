@@ -149,6 +149,8 @@ function getWeather(zip, days){
                 $(".forcast").html(array)
     
               }
+        }else{
+            $(".forcast").html(array)
         }
 
     }).fail(function(e){

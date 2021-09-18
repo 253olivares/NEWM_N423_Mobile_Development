@@ -6,9 +6,19 @@
    .holder{
        padding-left: 20px;
        width: 900px;
+       display: flex;
+       justify-content: space-between;
        margin: auto;
        color: white;
-       font-size: 25px;
+       font-size: 20px;
        line-height: 90px;
+       .accountStuff{
+           display: flex;
+           justify-content: space-evenly;
+           width: 30%;
+           h3:hover{
+               cursor: pointer;
+           }
+       }
    }
 }

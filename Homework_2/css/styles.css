@@ -29,10 +29,28 @@ h1, h2, h3, h4, h5, h6, p {
 .header .holder {
   padding-left: 20px;
   width: 900px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin: auto;
   color: white;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 90px;
+}
+.header .holder .accountStuff {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 30%;
+}
+.header .holder .accountStuff h3:hover {
+  cursor: pointer;
 }
 
 .weatherInput {
