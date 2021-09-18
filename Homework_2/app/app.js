@@ -1,7 +1,6 @@
 var error =`<div class="InfoBox1">
 <h1 id="feedback">To begin please fill out Zipcode and how many days you want to view!</h1>
 </div>`;
-var displayInfo = ``;
 
 // This function runs a command that grabs our form data our form data will contain the zipcode data that we will use to change our weather api search paremeters and get specfic data.
 function eventForm(){
@@ -42,6 +41,62 @@ function getWeather(zip, days){
         console.log(data.current.temp_f);
         console.log(data.current.condition.text);
         console.log(data.current.condition.icon); 
+        let region = data.location.region; 
+        let location = data.location.name;
+        let iconStatus = data.current.condition.icon;
+        let description = data.current.condition.text;
+        let temp_c = data.current.temp_c;
+        let temp_f = data.current.temp_f;
+        let humidity = data.current.humidity;
+        let percip = data.current.precip_in;
+        let wind = data.current.wind_mph;
+        let uv = data.current.uv;
+
+        var displayInfo = ` <div class="infoBox">
+<div class="conditionName">
+    <img src="${iconStatus}" height="120px" alt="Weather Condition">
+    <div class="location">
+        <h1 class="local">${region}, ${location}</h1>
+        <hr class="under">
+        <h3 class="desc">${description}</h3>
+    </div>
+</div>
+<div class="tempature">
+    <h2>C° ${temp_c} / F° ${temp_f}</h2>
+</div>
+<div class="moreInfo">
+    <div class="humidity extras">
+        <img src="img/Humidity.png" width="100px" height="100px"alt="">
+        <br>
+        <h3>${humidity}%</h3>
+        <h2>Humidity</h2>
+    </div>
+    <div class="precip extras">
+        <img src="img/Percipitation.png" width="100px" height="100px" alt="">
+        <br>
+        <h3>${percip} in</h3>
+        <h2>Percipitation</h2>
+    </div>
+    <div class="wind extras">
+        <img src="img/Wind.png" width="100px" height="100px" alt="">
+        <br>
+        <h3>${wind} mph</h3>
+        <h2>Wind</h2>
+    </div>
+    <div class="uv extras">
+        <img src="img/Uv.png" width="100px" height="100px" alt="">
+        <br>
+        <h3>${uv}</h3>
+        <h2>UV</h2>
+    </div>
+</div>
+</div>
+`;
+        $('.glass').html(displayInfo);
+
+
+        
+
     }).fail(function(e){
         console.log(e);
         $(".glass").html(error);
