@@ -112,10 +112,11 @@ function getWeather(zip, days){
         // before I begin the loop I have to subtract a day from the user input values since we are already displaying the current day above
 
         let forcast = days - 1;
+        let array = "";
         if(!forcast == 0){
             console.log(data.forecast); 
             for (let i = 0; i < forcast; i++) {
-                let displayday = i +1 ;
+                let displayday = i + 1 ;
                 let forecastDate = data.forecast.forecastday[displayday].date;
                 let forcastImage = data.forecast.forecastday[displayday].day.condition.icon;
                 let forcastText = data.forecast.forecastday[displayday].day.condition.text;
@@ -143,9 +144,9 @@ function getWeather(zip, days){
         <h4>Wind : ${forecastwindmph} mph / ${forecastwind} kph</h4>
         <h4>UV : ${forecastuv}</h4>
         </div>`;
-
-                $(".forcast").append(displayForcast);
-
+        
+                array = array + displayForcast;
+                $(".forcast").html(array)
     
               }
         }
