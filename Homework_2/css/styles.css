@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background-color: #E7E9EB;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding-bottom: 16px;
+}
+
+.header {
+  width: 100%;
+  background-color: #282A35;
+  height: 90px;
+  -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.header .holder {
+  padding-left: 20px;
+  width: 900px;
+  margin: auto;
+  color: white;
+  font-size: 25px;
+  line-height: 90px;
+}
+
+.weatherInput {
+  width: 900px;
+  margin: auto;
+  min-height: calc(100vh - 90px);
+  background-color: white;
+  -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.weatherInput .userSettings {
+  padding: 20px;
+  width: 900px;
+  margin: auto;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.weatherInput .userSettings .zipcodeLabel {
+  line-height: 50px;
+  margin-right: 10px;
+}
+.weatherInput .userSettings .daysLabel {
+  margin-left: 20px;
+  line-height: 50px;
+  margin-right: 10px;
+}
+.weatherInput .userSettings #zipcode {
+  border-radius: 10px 0px 0px 10px;
+  border: none;
+  padding: 14px;
+  font-size: 17px;
+}
+.weatherInput .userSettings #submission {
+  background-color: #80dfff;
+  color: white;
+  padding: 14px;
+  border: none;
+  font-size: 17px;
+  border-radius: 0px 10px 10px 0px;
+}
+.weatherInput .userSettings #daysSelection {
+  font-size: 17px;
+  padding: 14px 18px 14px 18px;
+  border: none;
+  border-radius: 10px;
+}
+.weatherInput .today {
+  padding: 20px;
+  width: 900px;
+  margin: auto;
+}
+.weatherInput .today .currentDay {
+  width: 90%;
+  display: block;
+  border-radius: 8px;
+  margin: auto;
+  min-height: 500px;
+  background-color: #0099ff;
+  /* For browsers that do not support gradients */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#007acc), to(#80ccff));
+  background-image: linear-gradient(180deg, #007acc, #80ccff);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.weatherInput .today .currentDay .glass {
+  width: 90%;
+  height: 450px;
+  display: block;
+  border-radius: 3px;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+          backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+}

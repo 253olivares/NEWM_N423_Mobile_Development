@@ -1,12 +1,9 @@
 // This function runs a command that grabs our form data our form data will contain the zipcode data that we will use to change our weather api search paremeters and get specfic data.
 function eventForm(){
-    $("").click(function(e){
-        console.log("test")
-        e.preventDefault()
-    });
+
 }
 // here this function grabs our zip data and plus it into our API search paremeters. Here this API will grab information based on our information inserted.
-function getWeather(zip){
+function getWeather(zip, days){
 
 }
 
