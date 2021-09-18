@@ -30,6 +30,7 @@ function eventForm(){
 function getWeather(zip, days){
     $.getJSON(`https://api.weatherapi.com/v1/forecast.json?key=1e60b3a3baf345238d6202952211309&q=${zip}&days=${days}&aqi=no&alerts=no
     `,function(data){
+        // this long strip of code grabs data from our api json string and attaches variables to them that is then put into the div and dynamically updates the information based on what area the user is requestings
         console.log(data.current);
         console.log(data.location.region);
         console.log(data.location.name);
@@ -50,9 +51,12 @@ function getWeather(zip, days){
         let humidity = data.current.humidity;
         let percip = data.current.precip_in;
         let percip_mm = data.current.precip_mm;
+        let wind_dir = data.current.wind_dir;
         let wind = data.current.wind_mph;
         let wind_kph = data.current.wind_kph;
         let uv = data.current.uv;
+        let feelsC = data.current.feelslike_c;
+        let feelsF = data.current.feelslike_f;
 
         var displayInfo = ` <div class="infoBox">
 <div class="conditionName">
@@ -64,31 +68,32 @@ function getWeather(zip, days){
     </div>
 </div>
 <div class="tempature">
-    <h2>C° ${temp_c} / F° ${temp_f}</h2>
+    <h2>C° ${temp_c} / F° ${temp_f}</h2> <h2>Feels Like: C° ${feelsC} / F° ${feelsF}</h2> 
 </div>
 <div class="moreInfo">
     <div class="humidity extras">
-        <img src="img/Humidity.png" width="100px" height="100px"alt="">
+        <img src="img/Humidity.png" width="80px" height="80px"alt="">
         <br>
         <h3>${humidity}%</h3>
         <h2>Humidity</h2>
     </div>
     <div class="precip extras">
-        <img src="img/Percipitation.png" width="100px" height="100px" alt="">
+        <img src="img/Percipitation.png" width="80px" height="80px" alt="">
         <br>
         <h3>${percip_mm} mm</h3>
         <h3>${percip} in</h3>
         <h2>Percipitation</h2>
     </div>
     <div class="wind extras">
-        <img src="img/Wind.png" width="100px" height="100px" alt="">
+        <img src="img/Wind.png" width="80px" height="80px" alt="">
         <br>
         <h3>${wind} mph</h3>
         <h3>${wind_kph} kph</h3>
+        <h3>${wind_dir}</h3>
         <h2>Wind</h2>
     </div>
     <div class="uv extras">
-        <img src="img/Uv.png" width="100px" height="100px" alt="">
+        <img src="img/Uv.png" width="80px" height="80px" alt="">
         <br>
         <h3>${uv}</h3>
         <h2>UV</h2>
@@ -97,9 +102,42 @@ function getWeather(zip, days){
 </div>
 `;
         $('.glass').html(displayInfo);
+        // Above was grabbing data for the the current day below I am repeating the same steps putting it underneath
+        // I begin by creating a loop that will repeat the forcast code depending on the number of days
+
+        // Here I am declaring a viarble that creates the template I will be using for the forcast days
+        // console.log(data.forecast);
+        // console.log(data.forecast.forecastday[0]);
+        // console.log(data.forecast.forecastday[1]);
+        // before I begin the loop I have to subtract a day from the user input values since we are already displaying the current day above
+
+        let forcast = days - 1;
+        if(!forcast == 0){
+            console.log(data.forecast); 
+            for (let i = 0; i < forcast; i++) {
+                let displayday= i +1;
+                let 
+                console.log(i);
+                console.log(data.forecast.forecastday[displayday]);
+                // let currentDay = i + 1;
+                // let iconStatus = data.current.condition.icon;
+    
+              }
+        }
 
 
-        
+          var displayForcast = ` <div class="day">
+        <h2>Day 2</h2>
+        <img src="//cdn.weatherapi.com/weather/64x64/day/116.png" width="75px" walt="icon">
+        <h4 class="dayName">Partly Cloudy</h4>
+        <h4 class="temp">C° 23</h4>
+        <h4 class="temp">F° 23</h4>
+        <h4>Hum. : 45%</h4>
+        <h4>Percp. : 4 in / 10 mm</h4>
+        <h4>Wind : 20 mph / 10 kph</h4>
+        <h4>Wind Dir. : N</h4>
+        <h4>UV : 9</h4>
+        </div>`;
 
     }).fail(function(e){
         console.log(e);

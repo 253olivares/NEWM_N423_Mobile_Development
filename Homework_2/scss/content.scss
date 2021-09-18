@@ -121,14 +121,23 @@
                         margin-top: 15px;
                         .extras{
                             width: 24%;
-                            height:195px;
+                            height:220px;
                             display: flex;
                             flex-direction: column;
+                            position: relative;
                             img{
                                 margin-left: auto;
                                 margin-right: auto;
                             }
+                            h2{
+                                position: absolute;
+                                bottom: 0px;
+                                text-align: center;
+                                width: 100%;
+                            }
+
                             h3{
+                                font-size: 15px;
                                 padding-bottom: 10px;
                             }
                         }
@@ -144,10 +153,9 @@
         display: flex;
         justify-content: center;
         .day{
-            width: 25%;
+            width: 24%;
             min-height:400px;
             text-align: center;
-            background-color: burlywood;
             .dayName{
                 padding-bottom: 16px;
             }
@@ -155,5 +163,15 @@
                 padding-bottom: 5px;
             }
         }
+        .day:nth-child(2){
+            border-left: 2px solid #282A35;
+        }
+        .day:nth-child(3){
+            border-left: 2px solid #282A35;
+        }
+        .day:nth-child(4){
+            border-left: 2px solid #282A35;
+        }
+
     }
 }

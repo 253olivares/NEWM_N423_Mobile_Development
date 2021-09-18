@@ -195,7 +195,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .weatherInput .today .currentDay .glass .infoBox .moreInfo .extras {
   width: 24%;
-  height: 195px;
+  height: 220px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -203,12 +203,20 @@ h1, h2, h3, h4, h5, h6, p {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 .weatherInput .today .currentDay .glass .infoBox .moreInfo .extras img {
   margin-left: auto;
   margin-right: auto;
 }
+.weatherInput .today .currentDay .glass .infoBox .moreInfo .extras h2 {
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+}
 .weatherInput .today .currentDay .glass .infoBox .moreInfo .extras h3 {
+  font-size: 15px;
   padding-bottom: 10px;
 }
 .weatherInput .forcast {
@@ -223,14 +231,22 @@ h1, h2, h3, h4, h5, h6, p {
           justify-content: center;
 }
 .weatherInput .forcast .day {
-  width: 25%;
+  width: 24%;
   min-height: 400px;
   text-align: center;
-  background-color: burlywood;
 }
 .weatherInput .forcast .day .dayName {
   padding-bottom: 16px;
 }
 .weatherInput .forcast .day .temp {
   padding-bottom: 5px;
+}
+.weatherInput .forcast .day:nth-child(2) {
+  border-left: 2px solid #282A35;
+}
+.weatherInput .forcast .day:nth-child(3) {
+  border-left: 2px solid #282A35;
+}
+.weatherInput .forcast .day:nth-child(4) {
+  border-left: 2px solid #282A35;
 }
