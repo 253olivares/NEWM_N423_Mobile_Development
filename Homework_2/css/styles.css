@@ -81,6 +81,9 @@ h1, h2, h3, h4, h5, h6, p {
   font-size: 17px;
   border-radius: 0px 10px 10px 0px;
 }
+.weatherInput .userSettings #submission:hover {
+  cursor: pointer;
+}
 .weatherInput .userSettings #daysSelection {
   font-size: 17px;
   padding: 14px 18px 14px 18px;
@@ -112,10 +115,32 @@ h1, h2, h3, h4, h5, h6, p {
 .weatherInput .today .currentDay .glass {
   width: 90%;
   height: 450px;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 3px;
+  text-align: center;
+  color: white;
   margin: auto;
   background-color: rgba(255, 255, 255, 0.3);
   -webkit-backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
           backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+}
+.weatherInput .today .currentDay .glass h1 {
+  width: 85%;
+}
+.weatherInput hr {
+  width: 90%;
+  margin: auto;
+  border: 0;
+  height: 2px;
+  background: #333;
+  background-image: -webkit-gradient(linear, left top, right top, from(#ccc), color-stop(#333), to(#ccc));
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
