@@ -118,7 +118,7 @@
                         width: 100%;
                         display: flex;
                         justify-content: space-around;
-                        margin-top: 25px;
+                        margin-top: 15px;
                         .extras{
                             width: 24%;
                             height:195px;
@@ -128,10 +128,32 @@
                                 margin-left: auto;
                                 margin-right: auto;
                             }
+                            h3{
+                                padding-bottom: 10px;
+                            }
                         }
                     }
                 }
             }
         }  
+    }
+    .forcast{
+        width: 900px;
+        margin: auto;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        .day{
+            width: 25%;
+            min-height:400px;
+            text-align: center;
+            background-color: burlywood;
+            .dayName{
+                padding-bottom: 16px;
+            }
+            .temp{
+                padding-bottom: 5px;
+            }
+        }
     }
 }

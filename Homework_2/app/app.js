@@ -28,7 +28,7 @@ function eventForm(){
 
 // here this function grabs our zip data and plus it into our API search paremeters. Here this API will grab information based on our information inserted.
 function getWeather(zip, days){
-    $.getJSON(`http://api.weatherapi.com/v1/forecast.json?key=1e60b3a3baf345238d6202952211309&q=${zip}&days=${days}&aqi=no&alerts=no
+    $.getJSON(`https://api.weatherapi.com/v1/forecast.json?key=1e60b3a3baf345238d6202952211309&q=${zip}&days=${days}&aqi=no&alerts=no
     `,function(data){
         console.log(data.current);
         console.log(data.location.region);
@@ -49,7 +49,9 @@ function getWeather(zip, days){
         let temp_f = data.current.temp_f;
         let humidity = data.current.humidity;
         let percip = data.current.precip_in;
+        let percip_mm = data.current.precip_mm;
         let wind = data.current.wind_mph;
+        let wind_kph = data.current.wind_kph;
         let uv = data.current.uv;
 
         var displayInfo = ` <div class="infoBox">
@@ -74,6 +76,7 @@ function getWeather(zip, days){
     <div class="precip extras">
         <img src="img/Percipitation.png" width="100px" height="100px" alt="">
         <br>
+        <h3>${percip_mm} mm</h3>
         <h3>${percip} in</h3>
         <h2>Percipitation</h2>
     </div>
@@ -81,6 +84,7 @@ function getWeather(zip, days){
         <img src="img/Wind.png" width="100px" height="100px" alt="">
         <br>
         <h3>${wind} mph</h3>
+        <h3>${wind_kph} kph</h3>
         <h2>Wind</h2>
     </div>
     <div class="uv extras">
