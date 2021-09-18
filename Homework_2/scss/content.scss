@@ -62,9 +62,6 @@
             .glass{
                 width: 90%;
                 height: 450px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 border-radius: 3px;
                 text-align: center;
                 color: white;
@@ -73,18 +70,68 @@
                 // backdrop-filter: saturate(180%) blur(10px);
                 background-color: rgba(255, 255, 255, 0.3);
                 backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
-                h1{
-                    width: 85%;
+                .InfoBox1{
+                    width: 100%;
+                    height: 450px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    #feedback{
+                        width: 85%;
+                    }
+                }
+                .infoBox{
+                    width: 100%;
+                    height: 450px;
+                    padding: 30px;
+                    .conditionName{
+                        width: 100%;
+                        height: 120px;
+                        display: flex;
+                        justify-content: space-between;
+                         align-items: center;
+                        .location{
+                            .local{
+                                padding-bottom: 0px;
+                                font-size: 40px;
+                            }
+                            .under{
+                                background-color: white;
+                                border: none;
+                                height: 2px;
+                                width: calc(100% + 20px);
+                                margin-left: -20px;
+                            }
+                            .desc{
+                                margin-top: 10px;
+                                text-align: right;
+                            }
+                        }
+                    }
+                    .tempature{
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .moreInfo{
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 25px;
+                        .extras{
+                            width: 24%;
+                            height:195px;
+                            background-color: yellow;
+                            border-style: solid;
+                            border-color: black;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                        }
+                    }
                 }
             }
         }  
     }
-    hr{ 
-        width: 90%;
-        margin: auto;
-        border: 0;
-        height: 2px;
-        background: #333;
-        background-image: linear-gradient(to right, #ccc, #333, #ccc); 
-    } 
 }
