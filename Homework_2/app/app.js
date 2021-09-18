@@ -115,29 +115,40 @@ function getWeather(zip, days){
         if(!forcast == 0){
             console.log(data.forecast); 
             for (let i = 0; i < forcast; i++) {
-                let displayday= i +1;
-                let 
+                let displayday = i +1 ;
+                let forecastDate = data.forecast.forecastday[displayday].date;
+                let forcastImage = data.forecast.forecastday[displayday].day.condition.icon;
+                let forcastText = data.forecast.forecastday[displayday].day.condition.text;
+                let forecastTemp_c = data.forecast.forecastday[displayday].day.avgtemp_c;
+                let forecastTemp_f = data.forecast.forecastday[displayday].day.avgtemp_f;
+                let forecastHum = data.forecast.forecastday[displayday].day.avghumidity;
+                let forecastPrecip_in = data.forecast.forecastday[displayday].day.totalprecip_in;
+                let forecastPrecip_mm = data.forecast.forecastday[displayday].day.totalprecip_mm;
+                let forecastwind = data.forecast.forecastday[displayday].day.maxwind_kph;
+                let forecastwindmph = data.forecast.forecastday[displayday].day.maxwind_mph;
+                let forecastuv = data.forecast.forecastday[displayday].day.uv;
                 console.log(i);
                 console.log(data.forecast.forecastday[displayday]);
-                // let currentDay = i + 1;
-                // let iconStatus = data.current.condition.icon;
+
+                var displayForcast = ` <div class="day">
+        <h2>Day ${displayday+1}</h2>
+        <h4>${forecastDate}</h4>
+        <img src="${forcastImage}" width="75px" walt="icon">
+        <h4 class="dayName">${forcastText}</h4>
+        <h4 class="temp">C° ${forecastTemp_c}</h4>
+        <h4 class="temp">F° ${forecastTemp_f}</h4>
+        <br>
+        <h4>Hum. : ${forecastHum}%</h4>
+        <h4>Percp. : ${forecastPrecip_in} in / ${forecastPrecip_mm } mm</h4>
+        <h4>Wind : ${forecastwindmph} mph / ${forecastwind} kph</h4>
+        <h4>UV : ${forecastuv}</h4>
+        </div>`;
+
+                $(".forcast").append(displayForcast);
+
     
               }
         }
-
-
-          var displayForcast = ` <div class="day">
-        <h2>Day 2</h2>
-        <img src="//cdn.weatherapi.com/weather/64x64/day/116.png" width="75px" walt="icon">
-        <h4 class="dayName">Partly Cloudy</h4>
-        <h4 class="temp">C° 23</h4>
-        <h4 class="temp">F° 23</h4>
-        <h4>Hum. : 45%</h4>
-        <h4>Percp. : 4 in / 10 mm</h4>
-        <h4>Wind : 20 mph / 10 kph</h4>
-        <h4>Wind Dir. : N</h4>
-        <h4>UV : 9</h4>
-        </div>`;
 
     }).fail(function(e){
         console.log(e);

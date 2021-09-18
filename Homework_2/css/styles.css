@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6, p {
           justify-content: center;
 }
 .weatherInput .forcast .day {
-  width: 24%;
+  width: 25%;
   min-height: 400px;
   text-align: center;
 }
