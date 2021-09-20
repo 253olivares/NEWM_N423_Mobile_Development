@@ -1,0 +1,12 @@
+.text{
+    font-size: 30px;
+}
+.carText{
+    font-size: 30px;
+}
+.info{
+    background-color: red;
+}
+.info:nth-child(even){
+    background-color: green;
+}
