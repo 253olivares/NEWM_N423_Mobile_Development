@@ -1,0 +1,43 @@
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+html, body {
+ height: 100%
+}
+h1, h2, h3, h4, h5, h6, p {
+ margin-bottom: 16px
+}
+.wrapper{
+    padding: 50px;
+}
+label, input{
+    display: block;
+}
+
+.submitBtn{
+    margin-top: 10px;
+    width: 200px;
+    padding: 10px 4px;
+    background-color: aqua;
+    border-radius: 10px;
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.submitBtn:hover{
+    cursor: pointer;
+}
+.getBtn{
+    width: 200px;
+    padding: 10px 4px;
+    background-color: aqua;
+    border-radius: 10px;
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.getBtn:hover{
+    cursor: pointer;
+}

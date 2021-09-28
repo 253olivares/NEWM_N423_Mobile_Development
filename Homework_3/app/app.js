@@ -4,7 +4,7 @@ function initSite(){
         console.log("You have information currently in your LocalStorage!");
         console.log("Information previously in localStorage:");
         console.log(localStorage);
-        localStorage.clear();
+        // localStorage.clear();
         console.log("Local storage cleared.");
     }
 }
@@ -20,17 +20,20 @@ function initListener(){
         let email = $("#email").val();
         let classes = $("#classes").val();
         let classArr = [];
-        console.log("information succesfully retrieved!")
-        classArr = classes.split(" ").join("").split(",");
-        console.log(classArr);
-        Obj = {"Name": name, "Age": age, "Phone": phone, "Email": email ,"Classes": classArr };
-        console.log("Data succesfully pushed into Obj Array");
-        Students.push(Obj);
-        localStorage.setItem(`Studednts`, JSON.stringify(Students));
-        console.log("Data Succesfully written to the local storage!")
+            console.log("information succesfully retrieved!")
+            classArr = classes.split(" ").join("").split(",");
+            console.log(classArr);
+            Obj = {"Name": name, "Age": age, "Phone": phone, "Email": email ,"Classes": classArr };
+            console.log("Data succesfully pushed into Obj Array");
+            Students.push(Obj);
+            localStorage.setItem(`Studednts`, JSON.stringify(Students));
+            console.log("Data Succesfully written to the local storage!")
+            console.log("Value Age is not numeric or contains non numeric values.");
     });
     $("#displayButton").click(function(e){
         console.log("Running the display local storage data function!");
+        $(".one").html(" ");
+        $(".two").html(" ");
         e.preventDefault();
         let data = JSON.parse(localStorage.getItem("Studednts"));
         console.log(data);
