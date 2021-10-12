@@ -22,7 +22,7 @@ function filterListen(){
       .collection("Albums")
       .where("genre", "==", "Hip Hop")
       .get()
-      .then(function (querySnapshotzaZ) {
+      .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             $(".albumContent").append(`
             <div class="album">
