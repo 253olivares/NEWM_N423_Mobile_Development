@@ -1,0 +1,128 @@
+nav{
+    color: white;
+    background-color: #131921;
+    height: 100px;
+    .container{
+        h1{
+            font-size: 50px;
+            line-height: 100px;
+        }
+        .filter{
+            width:75%;
+            display: flex;
+            justify-content: end;
+            h3{
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size:30px;
+            }
+            h3:hover{
+                cursor: pointer;
+            }
+        }
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 1350px;
+        margin: auto;
+    }
+}
+
+.albumContent{
+    padding-top: 75px;
+    width: 1350px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: white;
+    .album{
+        width: 325px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 30px;
+        img{
+            width: 200px;
+        }
+    }
+}
+.modal{
+    position: fixed;
+    /* animation: fadeIn 5s; */
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    .bgModal{
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0,0,0,.7);
+    }
+    .modalDisplay{
+        position: relative;
+        z-index: 99;
+        width: 800px;
+        height: 700px;  
+        background-color: #fff;
+        display: flex;
+        justify-content: space-around;
+        border-radius: 10px;
+        align-items: center;
+
+        .creaateAccount{
+            display: flex;
+            flex-wrap: flex;
+            flex-direction: column;
+            label{
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            .modalIn{
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px 5px 0px 0px;
+                border: none;
+                padding: 10px;
+                background-color: #eaeded;
+                border-bottom: solid black 2px; 
+            }
+        }
+        .loginAccount{
+            display: flex;
+            flex-wrap: flex;
+            flex-direction: column;
+            label{
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            .modalIn{
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px 5px 0px 0px;
+                border: none;
+                padding: 10px;
+                background-color: #eaeded;
+                border-bottom: solid black 2px; 
+            }
+        }
+    }
+}
+.modadlButton{
+    border: none;
+    padding: 10px;
+    background-color: #2b7bcb;
+    color: white;
+    border-radius: 5px;
+    margin-top: 12px;
+    font-size: 18px;
+}
+.modadlButton:hover{
+    cursor: pointer;
+}

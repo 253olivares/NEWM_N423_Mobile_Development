@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Firebase HW6</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div class="modal" > 
+      <div class="bgModal" onclick="removeModal()">
+
+      </div>
+      <div class="modalDisplay">
+          <div class="creaateAccount">
+            <h2>Create Account</h2>
+            <label for="fName">First Name:</label>
+            <input type="text" id="fName" class="modalIn">
+            <label for="lName">Last Name:</label>
+            <input type="text" id="lName" class="modalIn">
+            <label for="emailCreate">Email Address:</label>
+            <input type="email" id="emailCreate" class="modalIn">
+            <label for="passwordCreate">Password:</label>
+            <input type="password" id="passwordCreate" minlength="8" class="modalIn">
+            <label for="genre">Fav Music Genre:</label>
+            <select name="cars" id="genre" class="modalIn">
+              <option value="hiphop">Hip Hop</option>
+              <option value="rap">Rap</option>
+              <option value="indie">Indie</option>
+            </select>
+            <input onclick="createUser()" type="submit" value="Create Account" id="create" class="modadlButton">
+          </div>
+          <div class="loginAccount">
+            <h2>Login</h2>
+            <label for="liemail">Email Address:</label>
+            <input type="email" id="liemail" class="modalIn">
+            <label for="lipassword">Password:</label>
+            <input type="password" id="lipassword" minlength="8" class="modalIn">
+            <input onclick="login()" type="submit" value="Login" id="login" class="modadlButton">
+          </div>
+      </div>
+    </div>
+    <div class="pageContainer">
+      <nav>
+        <div class="container">
+          <h1>Homework 5</h1>
+          <div class="filter">
+            <h3 class="hide hiphop">Hip Hop</h3>
+            <h3 class="hide rap">Rap</h3>
+            <h3 class="hide indie">Indie</h3>
+            <h3 class="hide all">All</h3>
+            <h3 class="hide login" onclick="displayModal()">Log In / Sign Up</h3>
+            <h3 class="hide logout" onclick="signout()">Logout</h3>
+          </div>
+          <!-- <a href="#"> LoginIn / SignUp</a> -->
+        </div>
+      </nav>
+      <div class="albumContent">
+      </div>
+    </div>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.1.3/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.1.3/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.1.3/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script src="app/app.js"></script>
+  </body>
+</html>
