@@ -32,6 +32,20 @@ function updateUser(disName, genre){
 //     console.error("Error Writing Document: ", error);
 //   })
 // }
+//attempt to fix me create issuse didnt work
+function secondLogin(email, password) {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+ .then((userCredential) => {
+   // Signed in
+   var user = userCredential.user;
+ })
+ .catch((error) => {
+   var errorCode = error.code;
+   var errorMessage = error.message;
+   console.log(errorMessage)
+   alert(errorCode + " " +errorMessage);
+ });
+}
 
 function createUser(){
   let fName = $("#fName").val();
@@ -47,20 +61,21 @@ function createUser(){
   console.log(genre);
   firebase.auth().createUserWithEmailAndPassword(email, password)
 .then((userCredential) => {
+  let fullName  = fName + ' '+lName;
+  var user = userCredential.user; 
+  updateUser(fullName,genre);
   // Signed in 
   $("#fName").val("");
   $("#lName").val("");
   $("#emailCreate").val("");
   $("#passwordCreate").val("");
-  let fullName  = fName + ' '+lName;
-  updateUser(fullName,genre);
-  var user = userCredential.user;
-  console.log(userCredential.user);
+
+  // console.log(userCredential.user);
+  // console.log(user)
   // storeGenre(user.uid, genre);
-  console.log(user.uid);
-  console.log(genre)
-  initFirebase()
-  removeModal()
+  // console.log(user.uid);
+  // console.log(genre);
+  removeModal();
   // ...
 })
 .catch((error) => {
@@ -256,6 +271,7 @@ function initFirebase() {
       let isAnonymous = user.isAnonymous; 
       let genre = user.photoURL;
       let uid = user.uid; 
+      console.log(genre);
       console.log(uid);
       // old idea of creating a seperate genre database that stores user genre since we cant keep custom values in the authentiation
       // let genre = retrieveUserGenre(uid);
