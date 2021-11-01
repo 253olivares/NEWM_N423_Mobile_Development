@@ -79,9 +79,10 @@ nav {
     background-color: rgba(0, 0, 0, 0.7); }
   .modal .modalDisplay {
     position: relative;
+    flex-wrap: wrap;
     z-index: 99;
     width: 800px;
-    height: 700px;
+    height: 725px;
     background-color: #fff;
     display: flex;
     justify-content: space-around;
@@ -117,6 +118,30 @@ nav {
         padding: 10px;
         background-color: #eaeded;
         border-bottom: solid black 2px; }
+    .modal .modalDisplay .GoogleLogin {
+      width: 100%;
+      display: flex;
+      justify-content: center; }
+      .modal .modalDisplay .GoogleLogin button {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 15px;
+        background-color: white;
+        color: black; }
+        .modal .modalDisplay .GoogleLogin button .span1 {
+          color: #4285F4; }
+        .modal .modalDisplay .GoogleLogin button .span2 {
+          color: #EA4335; }
+        .modal .modalDisplay .GoogleLogin button .span3 {
+          color: #FBBC05; }
+        .modal .modalDisplay .GoogleLogin button .span4 {
+          color: #4285F4; }
+        .modal .modalDisplay .GoogleLogin button .span5 {
+          color: #34A853; }
+        .modal .modalDisplay .GoogleLogin button .span6 {
+          color: #EA4335; }
+      .modal .modalDisplay .GoogleLogin button:hover {
+        cursor: pointer; }
 
 .modadlButton {
   border: none;

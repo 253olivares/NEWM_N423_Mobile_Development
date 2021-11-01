@@ -1,6 +1,5 @@
 var _db;
 
-
 function displayModal(){
   $(".modal").css("display","flex");
 }
@@ -9,6 +8,119 @@ function removeModal(){
   $(".modal").css("display","none");
 
 }
+
+
+function loadAlbums(doc){
+  $(".albumContent").html("");
+  _db
+  .collection("Albums")
+  .get()
+  .then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+          $(".albumContent").append(`
+          <div class="album">
+              <h1>${doc.data().albumName}</h1>
+              <img src="${doc.data().albumPhoto}" alt="Album Image"> 
+              <h3>${doc.data().artistName}</h3>
+              <p>${doc.data().genre}</p>
+          </div>
+          `)
+      });
+  }, function(error){
+      console.log("Error:", error);
+  })
+}
+
+function loadSelectAlbums(music) {
+  $(".albumContent").html("");
+  if(music == "hiphop"){
+    music = "Hip Hop";
+  } else if (music == "rap"){
+    music = "Rap";
+  } else if (music == "indie"){
+    music = "Indie";
+  }
+  _db
+  .collection("Albums")
+  .where("genre", "==", music)
+  .get()
+  .then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+        $(".albumContent").append(`
+        <div class="album">
+            <h1>${doc.data().albumName}</h1>
+            <img src="${doc.data().albumPhoto}" alt="Album Image"> 
+            <h3>${doc.data().artistName}</h3>
+            <p>${doc.data().genre}</p>
+        </div>
+        `)
+    });
+  });
+}
+
+
+function initFirebase() {
+  firebase
+  .auth()
+  .onAuthStateChanged((user) => {
+    if(user){
+      let displayName = user.displayName;
+      let email = user.email;
+      let emailVerified = user.emailVerified;
+      let isAnonymous = user.isAnonymous; 
+      let genre = user.photoURL;
+      let uid = user.uid; 
+      console.log(genre);
+      console.log(uid);
+      // old idea of creating a seperate genre database that stores user genre since we cant keep custom values in the authentiation
+      // let genre = retrieveUserGenre(uid);
+      // var music = user.music;
+      if (genre == "hiphop" || "rap" || "indie"){
+
+        console.log("user has been logged in");
+        $(".hide").css("display","none");
+        $(".logout").css("display","block");
+        $(`.${genre}`).css("display","block");
+        //this function loads all selctive albums based on user set genre;
+        loadSelectAlbums(genre);
+
+      } else {
+        $(".hide").css("display","none");
+        $(".hiphop").css("display","block");
+        $(".rap").css("display","block");
+        $(".indie").css("display","block");
+        $(".all").css("display","block");
+        $(".logout").css("display","block");
+        //this loads all the albums w hen no user is signed in
+        console.log("Google User Logged in so display all!");
+        loadAlbums();
+      }
+    }else {
+      $(".hide").css("display","none");
+      $(".hiphop").css("display","block");
+      $(".rap").css("display","block");
+      $(".indie").css("display","block");
+      $(".all").css("display","block");
+      $(".login").css("display","block");
+      //this loads all the albums w hen no user is signed in
+      console.log("logged out");
+      loadAlbums();
+    };
+  });
+  _db = firebase.firestore();
+    // firebase
+    //   .auth()
+    //   .signInAnonymously()
+    //   .then(() => {
+    //     // signing in anonymously
+    //   })
+    //   .catch((error) => {
+    //     var errorCode = error.code;
+    //     var errorMessage = error.message;
+    //     _db = [];
+    //   });  
+    // _db = firebase.firestore();
+  };
 
 
 function updateUser(disName, genre){
@@ -64,6 +176,15 @@ function createUser(){
   let fullName  = fName + ' '+lName;
   var user = userCredential.user; 
   updateUser(fullName,genre);
+
+  // firebase
+  // .auth()
+  // .currentUser
+  // .updateProfile({
+  //   displayName:fullName,
+  //   photoURL:genre,
+  // });
+
   // Signed in 
   $("#fName").val("");
   $("#lName").val("");
@@ -75,7 +196,11 @@ function createUser(){
   // storeGenre(user.uid, genre);
   // console.log(user.uid);
   // console.log(genre);
+
+  // signout();
+  // secondLogin(email, password);
   removeModal();
+  // initFirebase();
   // ...
 })
 .catch((error) => {
@@ -198,53 +323,6 @@ function filterListen(){
     })
 }
 // first page load
-function loadAlbums(doc){
-  $(".albumContent").html("");
-  _db
-  .collection("Albums")
-  .get()
-  .then(function(querySnapshot){
-      querySnapshot.forEach(function(doc){
-          $(".albumContent").append(`
-          <div class="album">
-              <h1>${doc.data().albumName}</h1>
-              <img src="${doc.data().albumPhoto}" alt="Album Image"> 
-              <h3>${doc.data().artistName}</h3>
-              <p>${doc.data().genre}</p>
-          </div>
-          `)
-      });
-  }, function(error){
-      console.log("Error:", error);
-  })
-}
-
-function loadSelectAlbums(music) {
-  $(".albumContent").html("");
-  if(music == "hiphop"){
-    music = "Hip Hop";
-  } else if (music == "rap"){
-    music = "Rap";
-  } else if (music == "indie"){
-    music = "Indie";
-  }
-  _db
-  .collection("Albums")
-  .where("genre", "==", music)
-  .get()
-  .then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
-        $(".albumContent").append(`
-        <div class="album">
-            <h1>${doc.data().albumName}</h1>
-            <img src="${doc.data().albumPhoto}" alt="Album Image"> 
-            <h3>${doc.data().artistName}</h3>
-            <p>${doc.data().genre}</p>
-        </div>
-        `)
-    });
-  });
-}
 
 // function retrieveUserGenre(uid){
 //   _db.collection("hw6Users").where("uid", "==",uid).get().then((doc)=>{
@@ -260,54 +338,57 @@ function loadSelectAlbums(music) {
 // }
 
 
-function initFirebase() {
-  firebase
-  .auth()
-  .onAuthStateChanged((user) => {
-    if(user){
-      let displayName = user.displayName;
-      let email = user.email;
-      let emailVerified = user.emailVerified;
-      let isAnonymous = user.isAnonymous; 
-      let genre = user.photoURL;
-      let uid = user.uid; 
-      console.log(genre);
-      console.log(uid);
-      // old idea of creating a seperate genre database that stores user genre since we cant keep custom values in the authentiation
-      // let genre = retrieveUserGenre(uid);
-      // var music = user.music;
-      console.log("user has been logged in");
-      $(".hide").css("display","none");
-      $(".logout").css("display","block");
-      $(`.${genre}`).css("display","block");
-      //this function loads all selctive albums based on user set genre;
-      loadSelectAlbums(genre);
-    }else {
-      $(".hide").css("display","none");
-      $(".hiphop").css("display","block");
-      $(".rap").css("display","block");
-      $(".indie").css("display","block");
-      $(".all").css("display","block");
-      $(".login").css("display","block");
-      //this loads all the albums w hen no user is signed in
-      console.log("logged out");
-      loadAlbums();
-    };
+//google sign inz
+// var provider = new firebase.auth.GoogleAuthProvider();
+// firebase.auth()
+//   .signInWithPopup(provider)
+//   .then((result) => {
+//     /** @type {firebase.auth.OAuthCredential} */
+//     var credential = result.credential;
+
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     var token = credential.accessToken;
+//     // The signed-in user info.
+//     var user = result.user;
+//     // ...
+//   }).catch((error) => {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//     // The email of the user's account used.
+//     var email = error.email;
+//     // The firebase.auth.AuthCredential type that was used.
+//     var credential = error.credential;
+//     // ...
+//   });
+
+
+function signInGoogle() {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    removeModal();
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
   });
-  _db = firebase.firestore();
-    // firebase
-    //   .auth()
-    //   .signInAnonymously()
-    //   .then(() => {
-    //     // signing in anonymously
-    //   })
-    //   .catch((error) => {
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     _db = [];
-    //   });  
-    // _db = firebase.firestore();
-  };
+
+}
 
 $(document).ready(function(){
     try {
