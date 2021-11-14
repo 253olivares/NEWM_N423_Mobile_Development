@@ -1,4 +1,5 @@
 var _db;
+var g = "";
 
 function displayModal(){
   $(".modal").css("display","flex");
@@ -69,6 +70,11 @@ function initFirebase() {
       let emailVerified = user.emailVerified;
       let isAnonymous = user.isAnonymous; 
       let genre = user.photoURL;
+      if(user.photoURL == null){
+        console.log("g " + g);
+        genre = g;
+      }
+      
       let uid = user.uid; 
       console.log(genre);
       console.log(uid);
@@ -105,6 +111,7 @@ function initFirebase() {
       //this loads all the albums w hen no user is signed in
       console.log("logged out");
       loadAlbums();
+      g = "";
     };
   });
   _db = firebase.firestore();
@@ -165,7 +172,7 @@ function createUser(){
   let email = $("#emailCreate").val();
   let password = $("#passwordCreate").val();
   let genre = $("#genre").val();
-
+  g = genre;
   console.log(fName);
   console.log(lName);
   console.log(email);
@@ -174,7 +181,8 @@ function createUser(){
   firebase.auth().createUserWithEmailAndPassword(email, password)
 .then((userCredential) => {
   let fullName  = fName + ' '+lName;
-  var user = userCredential.user; 
+  var user = userCredential.user;
+ 
   updateUser(fullName,genre);
 
   // firebase
@@ -325,7 +333,7 @@ function filterListen(){
 // first page load
 
 // function retrieveUserGenre(uid){
-//   _db.collection("hw6Users").where("uid", "==",uid).get().then((doc)=>{
+//   _db.collection("hw6Users").doc(uid).get().then((doc)=>{
 //     if (doc) {
 //       console.log("Document data:", doc.data().genre);
 //   } else {
