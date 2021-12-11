@@ -58,10 +58,34 @@ function afterRoute(page) {
       console.log("you are on the account page!");
       break;
     case "book":
+      // loadSelectBook();
       break;
     case "newBook":
       break;
   }
+}
+
+function loadSelectBook() {
+  $(".bookPage").html(`
+  <div class="bookPage__holder">
+  <div class="bookPage__holder__images">
+      <img src="" alt="Communist Manifesto">
+  </div>
+  <div class="bookPage__holder__details"> 
+      <h1></h1>
+      <p>Author: </p>
+      <p>ISBN: </p>
+      <p>DOP: </p>
+      <p>Number of Pages</p>
+      <p>Description: </p>
+      <p>QT: </p>
+  </div>
+</div>
+<div class="buttons">
+  <button onclick="editBook(0)">Edit Book</button>
+  <button onclick="deleteBook(0)">Delete Book</button>
+</div>
+  `);
 }
 
 function loadBooks(doc) {
@@ -73,7 +97,7 @@ function loadBooks(doc) {
       function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           $(".catalogList").append(`
-          <div class="bookList" onclick="loadPick(${doc.data().id})">
+          <div class="bookList" onclick="loadPick(${doc.data()})">
           <div class="bookList__image">
               <img src="${doc.data().bookImage}" alt="Book image">
           </div>
@@ -100,9 +124,13 @@ function loadBooks(doc) {
 
 function loadPick(x) {
   MODEL.changeContent("book", afterRoute);
-  bookid = x;
+  book = x;
   console.log(x);
 }
+
+function editBook(x) {}
+
+function deleteBook(x) {}
 
 function checklogin() {
   if (logStatus == false) {
