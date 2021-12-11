@@ -1,9 +1,9 @@
 //Status Variable that will switch true and false based on what is set in the functions
 var logStatus = false;
-//Status variable that checkes for admin authorization
 var authorizationAdmin = false;
 //Initializes database
 var bookid;
+//Database
 var _db;
 
 //fucntion that checks for changes in the header
@@ -12,28 +12,64 @@ function checkHash() {
   route();
 }
 
+//Function to login
 function login() {
   let user = $("#logUser").val();
   let pass = $("#logPass").val();
+  _db
+    .collection("USERS")
+    .doc(user)
+    .get()
+    .then(
+      function (doc) {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(doc.data().email, pass)
+          .then((userCredential) => {
+            // Signed in
+            $("#logUser").val("");
+            $("#logPass").val("");
+            logStatus = true;
+            $(".sad").css("display", "");
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorMessage);
+            alert(errorCode + " " + errorMessage);
+          });
+      },
+      function (error) {
+        console.log("Error:", error);
+      }
+    );
 }
+
+//function to sign out
 function signout() {
   firebase
     .auth()
     .signOut()
     .then(() => {
       console.log("Signed Out");
+      logStatus = false;
+      authorizationAdmin = false;
+      MODEL.changeContent("home", afterRoute);
     })
     .catch((error) => {
       console.log(error);
       // An error happened.
     });
 }
+
+//function to sign up
 function signUp() {
   let fName = $("#signfullName").val();
   let lName = $("#signlastName").val();
   let username = $("#signuserName").val();
   let email = $("#signemail").val();
   let password = $("#signpassword").val();
+  let fullName = fName + " " + lName;
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
@@ -43,20 +79,24 @@ function signUp() {
       $("#signuserName").val("");
       $("#signemail").val("");
       $("#signpassword").val("");
-      db.collection("USERS")
-        .doc(userCredential.id)
+      _db
+        .collection("USERS")
+        .doc(username)
         .set({
-          name: fName + " " + lName,
+          name: fullName,
           username: username,
-          id: userCredential.id,
+          id: userCredential.user.uid,
           email: email,
+          cred: "User",
         })
         .then(() => {
           console.log("Document successfully written!");
+          logStatus = true;
         })
         .catch((error) => {
           console.error("Error writing document: ", error);
         });
+      console.log(userCredential.user);
       $(".sad").css("display", "");
     })
     .catch((error) => {
@@ -82,6 +122,7 @@ function afterRoute(page) {
       console.log("you are on the catalog page!");
       loginModal();
       loadBooks();
+      checkAuth();
       break;
     case "account":
       checkLogin();
@@ -97,6 +138,7 @@ function afterRoute(page) {
   }
 }
 
+//function to load selected book
 function loadSelectBook() {
   if (bookid == null) {
     $(".bookPage").html(
@@ -167,6 +209,7 @@ function loadSelectBook() {
   }
 }
 
+//function to load books
 function loadBooks(doc) {
   bookid = "";
   $(".catalogList").empty();
@@ -204,27 +247,38 @@ function loadBooks(doc) {
     );
 }
 
+//function to load picked book
 function loadPick(x) {
   MODEL.changeContent("book", afterRoute);
   bookid = x;
 }
 
+// function to take to edit page that will edit the book
 function editBook(x) {}
 
+// function to delete book
 function deleteBook(x) {}
 
-function checklogin() {
-  if (logStatus == false) {
-  } else {
+// function to check login on account page to see if a user is loged in
+function checkLogin() {
+  switch (logStatus) {
+    case true:
+      $(".accountPage").html("<h1>User is logged in!</h1>");
+      break;
+    case false:
+      $(".accountPage").html("<h1>No user is logged in!</h1>");
+      break;
   }
 }
 
 function checkAuth() {
-  console.log("test");
-  if (authorizationAdmin == false) {
-    $(".addBook").css("display", "");
-  } else {
-    $(".addBook").css("display", "flex");
+  switch (authorizationAdmin) {
+    case true:
+      $(".addBook").css("display", "flex");
+      break;
+    case false:
+      $(".addBook").css("display", "");
+      break;
   }
 }
 
@@ -244,18 +298,37 @@ function loginModal() {
 function initFirebase() {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+      _db
+        .collection("USERS")
+        .where("email", "==", user.email)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            switch (doc.data().cred) {
+              case "Admin":
+                authorizationAdmin = true;
+                break;
+            }
+            checkAuth();
+          });
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
       $(".navElements").css("display", "none");
       $(".account").css("display", "block");
       $(".logout").css("display", "block");
       $(".home").css("display", "block");
       $(".catalog").css("display", "block");
-      checkAuth();
       logStatus = true;
     } else {
       $(".navElements").css("display", "none");
       $(".lsnav").css("display", "block");
       $(".home").css("display", "block");
       $(".catalog").css("display", "block");
+      checkAuth();
       logStatus = false;
     }
   });

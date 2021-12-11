@@ -29,7 +29,7 @@
               <a href="#/catalog" class="navElements catalog">CATALOG</a>
               <a class="navElements lsnav">LOGIN/SIGNUP</a>
               <a href="#/account" class="navElements account">ACCOUNT</a>
-              <a class="navElements logout">LOGOUT</a>
+              <a class="navElements logout" onclick="signout()">LOGOUT</a>
             </div>
           </div>
         </nav>
@@ -50,7 +50,7 @@
                           <label for="logpassword">Password:</label>
                           <input title="logpassword" type="password" name="logpassword" id="logPass">
                       </div>
-                      <button class="logButton">Log In</button>
+                      <button class="logButton" onclick="login()">Log In</button>
                   </div>
                   <div class="signupRight">
                       <h1>Sign Up</h1>
@@ -74,7 +74,7 @@
                           <label for="signemail">Email:</label>
                           <input title="signemail" type="email" name="signemail" id="signemail">
                       </div>
-                      <button class="signButton">Sign Up</button>
+                      <button class="signButton" onclick="signUp()">Sign Up</button>
                   </div>
               </div>
               <div class="gtholder">
