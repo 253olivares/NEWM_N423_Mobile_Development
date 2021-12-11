@@ -81,13 +81,92 @@ function upload() {
   console.log("upload", imageFile);
 }
 
+function signout() {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log("Signed Out");
+      $(".diplayEdit").empty();
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error);
+      // An error happened.
+    });
+}
+
+function login() {
+  let email = $("#lemail").val();
+  let password = $("#lpassword").val();
+
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      _db = firebase.firestore();
+      var user = userCredential.user;
+      let userID = user.uid;
+      var docRef = _db.collection("USERS").doc(userID);
+
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+          let userProfile = doc.data();
+          $(".diplayEdit").append(
+            `<input type="text" id="firstName" placeholder="${userProfile.firstName}" />
+            <input type="text" id="lastName" placeholder="${userProfile.lastName}" />
+            <input disabled type="text" id="pemail" placeholder="${userProfile.email}" />
+            <div class="profileImg"><img id="pImg" src="${userProfile.userImageURL}"/> </div>
+            <button onclick="edit('${userID}')">Save</button>
+            `
+          );
+        } else {
+          console.log("No such document!");
+        }
+      });
+      $("#lemail").val("");
+      $("#lpassword").val("");
+      console.log("user has logged in");
+      console.log(user.uid);
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+      alert(errorCode + " " + errorMessage);
+    });
+}
+
 // function inirFirebase() {
 //   firebase
 //     .auth()
 //     .signInAnonymously()
 //     .then(() => {});
 // }
+function edit(userID) {
+  let fn = $("#firstName").val();
+  let ln = $("#lastName").val();
+  let profileObj = {
+    firstName: fn,
+    lastName: ln,
+  };
+  var docRef = _db.collection("USERS").doc(userID);
 
+  docRef
+    .update(profileObj)
+    .then(function () {
+      console.log("data has been updated");
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+      alert(errorCode + " " + errorMessage);
+    });
+}
 $(document).ready(function () {
   try {
     // inirFirebase();

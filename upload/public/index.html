@@ -9,17 +9,46 @@
         width: 400px;
         height: 40px;
       }
+      div {
+        margin-bottom: 30px;
+      }
+      .profileImg{
+        width: 150px;
+        height: 150px;
+        border-radius: 150px;
+        overflow: hidden;
+      }
+      .profileImg img{
+        height: 100%;
+        width: 100%;
+      }
     </style>
   </head>
   <body>
+    <div>
+      <h2>Create Account</h2>
+      <input type="text" id="fName" placeholder="First Name"/>
+      <input type="text" id="lName" placeholder="Last Name"/>
+      <input type="email" id="email" placeholder="Email Address"/>
+      <input type="password" id="password" placeholder="Password"/>
+      <input title="test" type="file" id="file">
+      <button onclick="CreateAccount()">Create Account</button>
+    </div>
 
-    <h2>Create Account</h2>
-    <input type="text" id="fName" placeholder="First Name"/>
-    <input type="text" id="lName" placeholder="Last Name"/>
-    <input type="email" id="email" placeholder="Email Address"/>
-    <input type="password" id="password" placeholder="Password"/>
-    <input title="test" type="file" id="file">
-    <button onclick="CreateAccount()">Create Account</button>
+    <div>
+      <h2>Login</h2>
+      <input type="email" id="lemail" placeholder="Email Address"/>
+      <input type="password" id="lpassword" placeholder="Password"/>
+      <button id="login" onclick="login()">Log In</button>
+    </div>
+
+    <div>
+      <button onclick="signout()"> Sign Out</button>
+    </div>
+
+    <div class="diplayEdit">
+      <h2>Data editing</h2>
+    </div>
 
 
         <!-- update the version number as needed -->

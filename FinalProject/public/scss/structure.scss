@@ -1,0 +1,206 @@
+@font-face{
+    font-family: MarkOT-Medium;
+    src: url(../css/fonts/MarkOT-Medium.ttf);
+}
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: "MarkOT-Medium";
+ font-weight: lighter;
+}
+html, body {
+ height: 100%;
+ width: 100%;
+ position: relative;
+ -ms-overflow-style: none;  
+ scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+ display: none;
+}
+h1, h2, h3, h4, h5, h6, p {
+ margin-bottom: 16px
+}
+#page-container{
+ position: relative;
+ min-height: 100vh;
+}
+#content-wrap{
+ padding-bottom: 100px;
+}
+.sad{
+    width: 100%;
+    height: calc(100vh - 325px);
+    display: none;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    z-index: 20;
+    .LoginLogout{
+        padding: 30px 10px 40px 10px;
+        background-color: #FFF;
+        color: #333;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        .closeHolder{
+            margin-left: 30px;
+            display: flex;
+            align-items: center;
+            img{
+                width: 30px;
+                height: 30px;
+            }
+            p{
+                margin-bottom: 0px;
+                font-size: 20px;
+                margin-left: 20px;
+            }
+        }
+        .closeHolder:hover{
+            cursor: pointer;
+        }
+        .llholder{
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            .loginLeft{
+                display: flex;
+                flex-direction: column;
+                padding: 15px 60px 15px 60px;
+                .logButton:hover{
+                    cursor: pointer;
+                }
+                h1{
+                    text-align: center;
+                }
+                div{
+                    display: flex;
+                    justify-content: space-between;
+                    width: 300px;
+                    padding: 5px;
+                }
+                label {
+                    padding: 5px;
+                }
+                input{
+                    padding: 5px;
+                    border: none;
+                    border-bottom: 1px solid black;
+                }
+                button{
+                    margin-top: 25px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 25px;
+                    background-color:#7A61FF;
+                    color: white;
+                    border: none;
+                    padding: 5px;
+                    width: 200px;
+                    font-size: 18px;
+                }
+            }
+            .signupRight{
+                display: flex;
+                flex-direction: column;
+                padding: 15px 60px 15px 60px;
+                .signButton:hover{
+                    cursor: pointer;
+                }
+                h1{
+                    text-align: center;
+                }
+                div{
+                    display: flex;
+                    justify-content: space-between;
+                    width: 300px;
+                    padding: 5px;
+                }
+                label {
+                    padding: 5px;
+                }
+                input{
+                    padding: 5px;
+                    border: none;
+                    border-bottom: 1px solid black;
+                }
+                button{
+                    margin-top: 25px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 25px;
+                    background-color:#7A61FF;
+                    color: white;
+                    border: none;
+                    padding: 5px;
+                    width: 150px;
+                    font-size: 18px;
+                }
+            }
+        }
+        .gtholder{
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            button{
+                padding: 10px;
+                display: flex;
+                align-items: center;
+            }
+            img{
+                margin-right: 15px;
+            }
+            .google{
+                background-color: #fff;
+                color:#333;
+                border: 1px solid #333;
+            }
+            .twitter{
+                background-color: #1DA1F2;
+                color:white;
+                border-radius: 5px;
+                border: none;
+            }
+            .google:hover{
+                cursor: pointer;
+            }
+            .twitter:hover{
+                cursor: pointer;
+            }
+        }
+    }
+    .ModalOver{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(128, 128, 128,.8);
+        display: block;
+        z-index: 5;
+    }
+    .LoginLogout{
+        position: absolute;
+        z-index: 10;
+    }
+}
+#app{
+    width: 100%;
+    height: calc(100vh - 325px);
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+}
+#app::-webkit-scrollbar {
+    display: none;
+   }
+#footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 210px;
+    background-color:#7A61FF;
+}

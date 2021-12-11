@@ -1,0 +1,139 @@
+<!-- 
+  Miguel Olivares
+  Todd Shelton
+  NEWM N423 DATABASE DEV FOR MOBILE APPS
+  12.6.21
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+
+    <div id="page-container">
+      <div id="content-wrap">
+        <!-- ALL PAGE CONTENT DISPLAYED HERE -->
+        <nav>
+          <div class="holder">
+            <div class="pageTitle">
+              <h1>PRIVATE SHELF</h1>
+            </div>
+            <div class="pageNav">
+              <a href="#/home" class="navElements home">HOME</a>
+              <a href="#/catalog" class="navElements catalog">CATALOG</a>
+              <a class="navElements lsnav">LOGIN/SIGNUP</a>
+              <a href="#/account" class="navElements account">ACCOUNT</a>
+              <a class="navElements logout">LOGOUT</a>
+            </div>
+          </div>
+        </nav>
+        <div class="sad">
+          <div class="LoginLogout">
+              <div class="closeHolder">
+                  <img src="images/times-solid.png" alt="">
+                  <p>Close Window</p>
+              </div>
+              <div class="llholder">
+                  <div class="loginLeft">
+                      <h1>Login In</h1>
+                      <div>
+                          <label for="logusername">Username:</label>
+                          <input title="logusername" type="text" name="logusername" id="logUser">
+                      </div>
+                      <div>
+                          <label for="logpassword">Password:</label>
+                          <input title="logpassword" type="password" name="logpassword" id="logPass">
+                      </div>
+                      <button class="logButton">Log In</button>
+                  </div>
+                  <div class="signupRight">
+                      <h1>Sign Up</h1>
+                      <div>
+                          <label for="signfullName">Full Name:</label>
+                          <input title="signfullName" type="text" name="signfullName" id="signfullName">
+                      </div>
+                      <div>
+                          <label for="signlastName">Last Name:</label>
+                          <input title="signlastName" type="text" name="signlastName" id="signlastName">
+                      </div>
+                      <div>
+                          <label for="signuserName">Username:</label>
+                          <input title="signuserName" type="text" name="signuserName" id="signuserName">
+                      </div>
+                      <div>
+                          <label for="signpassword">Password:</label>
+                          <input title="signpassword" type="password" name="signpassword" id="signpassword">
+                      </div>
+                      <div>
+                          <label for="signemail">Email:</label>
+                          <input title="signemail" type="email" name="signemail" id="signemail">
+                      </div>
+                      <button class="signButton">Sign Up</button>
+                  </div>
+              </div>
+              <div class="gtholder">
+                  <button title="googleButton" class="google"><img src="images/google.png" width="20px" height="20px" alt=""> Sign in with Google</button>
+                  <button title="twitterButton" class="twitter"><img src="images/twitter.png" width="20px" height="20px" style="color: white;" alt=""> Sign in with Twitter</button>
+              </div>
+          </div>
+          <div class="ModalOver">
+      
+          </div>
+      </div>
+        <div id="app"> 
+            
+
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+      <div class="backTop">
+        <p>Back to Top</p>
+      </div>
+      <div class="bottomFooter">
+        <div class="leftContent">
+          <h2>PRIVATE SHELF</h2>
+          <hr>
+          <p>Never get lost in your <br> personal bookshelf ever again!</p>
+        </div>
+        <div class="rightContent">
+          <p>Copyright @ 2021 IUPUI</p>
+          <div class="socialLinks">
+            <img src="images/instagram.png" width="30px" alt="Instagram">
+            <img src="images/twitter.png" width="30px" alt="Twitter">
+            <img src="images/facebook.png" width="30px" alt="Facebook">
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+     <!-- update the version number as needed -->
+     <script defer src="/__/firebase/9.5.0/firebase-app-compat.js"></script>
+     <!-- include only the Firebase features as you need -->
+     <script defer src="/__/firebase/9.5.0/firebase-auth-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-database-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-firestore-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-functions-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-messaging-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-storage-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-analytics-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-remote-config-compat.js"></script>
+     <script defer src="/__/firebase/9.5.0/firebase-performance-compat.js"></script>
+     <!-- 
+       initialize the SDK after all desired features are loaded, set useEmulator to false
+       to avoid connecting the SDK to running emulators.
+     -->
+     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+     <script src="lib/jquery-3.6.0.min.js"></script>
+     <script src="app/model.js"></script>
+     <script src="app/app.js"></script>
+  </body>
+</html>

@@ -56,6 +56,8 @@ function loadSelectAlbums(music) {
         </div>
         `)
     });
+  }, function (error) {
+    console.log("Error:", error);
   });
 }
 

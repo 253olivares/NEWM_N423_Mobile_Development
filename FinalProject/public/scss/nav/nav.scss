@@ -1,0 +1,40 @@
+nav{
+    height: 115px;
+    width: 100%;
+    background-image: linear-gradient(to right, rgba(122, 97, 255,.6),rgba(122, 97, 255,.6) ), url("../images/Books.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 22%;
+    color: #333333;
+    .holder{
+        margin-left: 70px;
+        margin-right: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        .pageTitle{
+            h1{
+                color: white;
+                font-size: 55px;
+                margin-bottom: 0px;
+            }
+        }
+        .pageNav{
+            display: flex;
+            .lsnav:hover{
+                cursor: pointer;
+            }
+            .logout:hover{
+                cursor: pointer;
+            }
+            a{
+
+                margin-left: 30px;
+                font-size: 25px;
+                color: white;
+                text-decoration: none;
+            }
+        }
+    }
+}

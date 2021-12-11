@@ -1,0 +1,23 @@
+.homePage{
+    width: 100%;
+    max-width: 1280px;
+    display: flex;
+    align-items: center;
+    .home{
+        padding: 40px;
+        width: 80%;
+        margin: auto;
+        border-radius: 25px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        h1{
+            text-align: center;
+        }
+        p{
+            text-align: center;
+            width: 90%;
+            padding: 25px;
+            margin: auto;
+        }
+        
+    }
+}

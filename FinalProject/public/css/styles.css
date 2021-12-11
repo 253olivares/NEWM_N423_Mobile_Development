@@ -1,0 +1,392 @@
+@font-face {
+  font-family: MarkOT-Medium;
+  src: url(../css/fonts/MarkOT-Medium.ttf); }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "MarkOT-Medium";
+  font-weight: lighter; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none; }
+
+body::-webkit-scrollbar {
+  display: none; }
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-bottom: 16px; }
+
+#page-container {
+  position: relative;
+  min-height: 100vh; }
+
+#content-wrap {
+  padding-bottom: 100px; }
+
+.sad {
+  width: 100%;
+  height: calc(100vh - 325px);
+  display: none;
+  align-items: center;
+  position: absolute;
+  justify-content: center;
+  z-index: 20; }
+  .sad .LoginLogout {
+    padding: 30px 10px 40px 10px;
+    background-color: #FFF;
+    color: #333;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; }
+    .sad .LoginLogout .closeHolder {
+      margin-left: 30px;
+      display: flex;
+      align-items: center; }
+      .sad .LoginLogout .closeHolder img {
+        width: 30px;
+        height: 30px; }
+      .sad .LoginLogout .closeHolder p {
+        margin-bottom: 0px;
+        font-size: 20px;
+        margin-left: 20px; }
+    .sad .LoginLogout .closeHolder:hover {
+      cursor: pointer; }
+    .sad .LoginLogout .llholder {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 10px;
+      padding-bottom: 10px; }
+      .sad .LoginLogout .llholder .loginLeft {
+        display: flex;
+        flex-direction: column;
+        padding: 15px 60px 15px 60px; }
+        .sad .LoginLogout .llholder .loginLeft .logButton:hover {
+          cursor: pointer; }
+        .sad .LoginLogout .llholder .loginLeft h1 {
+          text-align: center; }
+        .sad .LoginLogout .llholder .loginLeft div {
+          display: flex;
+          justify-content: space-between;
+          width: 300px;
+          padding: 5px; }
+        .sad .LoginLogout .llholder .loginLeft label {
+          padding: 5px; }
+        .sad .LoginLogout .llholder .loginLeft input {
+          padding: 5px;
+          border: none;
+          border-bottom: 1px solid black; }
+        .sad .LoginLogout .llholder .loginLeft button {
+          margin-top: 25px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 25px;
+          background-color: #7A61FF;
+          color: white;
+          border: none;
+          padding: 5px;
+          width: 200px;
+          font-size: 18px; }
+      .sad .LoginLogout .llholder .signupRight {
+        display: flex;
+        flex-direction: column;
+        padding: 15px 60px 15px 60px; }
+        .sad .LoginLogout .llholder .signupRight .signButton:hover {
+          cursor: pointer; }
+        .sad .LoginLogout .llholder .signupRight h1 {
+          text-align: center; }
+        .sad .LoginLogout .llholder .signupRight div {
+          display: flex;
+          justify-content: space-between;
+          width: 300px;
+          padding: 5px; }
+        .sad .LoginLogout .llholder .signupRight label {
+          padding: 5px; }
+        .sad .LoginLogout .llholder .signupRight input {
+          padding: 5px;
+          border: none;
+          border-bottom: 1px solid black; }
+        .sad .LoginLogout .llholder .signupRight button {
+          margin-top: 25px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 25px;
+          background-color: #7A61FF;
+          color: white;
+          border: none;
+          padding: 5px;
+          width: 150px;
+          font-size: 18px; }
+    .sad .LoginLogout .gtholder {
+      display: flex;
+      justify-content: center;
+      gap: 50px; }
+      .sad .LoginLogout .gtholder button {
+        padding: 10px;
+        display: flex;
+        align-items: center; }
+      .sad .LoginLogout .gtholder img {
+        margin-right: 15px; }
+      .sad .LoginLogout .gtholder .google {
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #333; }
+      .sad .LoginLogout .gtholder .twitter {
+        background-color: #1DA1F2;
+        color: white;
+        border-radius: 5px;
+        border: none; }
+      .sad .LoginLogout .gtholder .google:hover {
+        cursor: pointer; }
+      .sad .LoginLogout .gtholder .twitter:hover {
+        cursor: pointer; }
+  .sad .ModalOver {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.8);
+    display: block;
+    z-index: 5; }
+  .sad .LoginLogout {
+    position: absolute;
+    z-index: 10; }
+
+#app {
+  width: 100%;
+  height: calc(100vh - 325px);
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: scroll; }
+
+#app::-webkit-scrollbar {
+  display: none; }
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 210px;
+  background-color: #7A61FF; }
+
+nav {
+  height: 115px;
+  width: 100%;
+  background-image: linear-gradient(to right, rgba(122, 97, 255, 0.6), rgba(122, 97, 255, 0.6)), url("../images/Books.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 22%;
+  color: #333333; }
+  nav .holder {
+    margin-left: 70px;
+    margin-right: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%; }
+    nav .holder .pageTitle h1 {
+      color: white;
+      font-size: 55px;
+      margin-bottom: 0px; }
+    nav .holder .pageNav {
+      display: flex; }
+      nav .holder .pageNav .lsnav:hover {
+        cursor: pointer; }
+      nav .holder .pageNav .logout:hover {
+        cursor: pointer; }
+      nav .holder .pageNav a {
+        margin-left: 30px;
+        font-size: 25px;
+        color: white;
+        text-decoration: none; }
+
+.homePage {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: center; }
+  .homePage .home {
+    padding: 40px;
+    width: 80%;
+    margin: auto;
+    border-radius: 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; }
+    .homePage .home h1 {
+      text-align: center; }
+    .homePage .home p {
+      text-align: center;
+      width: 90%;
+      padding: 25px;
+      margin: auto; }
+
+.catalogPage {
+  width: 100%;
+  max-width: 1280px; }
+  .catalogPage .topList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 150px;
+    width: 90%;
+    margin: auto; }
+    .catalogPage .topList .filters {
+      display: flex; }
+    .catalogPage .topList .searchbardiv {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-right: 50px; }
+      .catalogPage .topList .searchbardiv label {
+        margin-right: 15px;
+        font-size: 20px; }
+      .catalogPage .topList .searchbardiv #SearchBar {
+        height: 30px;
+        border: none;
+        border-bottom: 2px solid black;
+        margin-right: 5px; }
+      .catalogPage .topList .searchbardiv button {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-color: #fff; }
+        .catalogPage .topList .searchbardiv button img {
+          width: 100%;
+          height: 100%; }
+      .catalogPage .topList .searchbardiv button:hover {
+        cursor: pointer; }
+    .catalogPage .topList .genreSearch {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center; }
+      .catalogPage .topList .genreSearch label {
+        margin-right: 15px;
+        font-size: 20px; }
+      .catalogPage .topList .genreSearch #genre {
+        height: 30px;
+        border: none;
+        border-bottom: 2px solid black;
+        margin-right: 5px; }
+      .catalogPage .topList .genreSearch button {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-color: #fff; }
+        .catalogPage .topList .genreSearch button img {
+          width: 100%;
+          height: 100%; }
+      .catalogPage .topList .genreSearch button:hover {
+        cursor: pointer; }
+    .catalogPage .topList .addBook {
+      display: flex;
+      align-items: center;
+      display: none; }
+      .catalogPage .topList .addBook button {
+        padding: 10px;
+        font-size: 20px;
+        background-color: #583DE8;
+        color: white;
+        border: none; }
+      .catalogPage .topList .addBook button:hover {
+        cursor: pointer; }
+  .catalogPage .catalogList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 50px; }
+    .catalogPage .catalogList .bookList {
+      background-color: #fff;
+      min-height: 100px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border: 2px solid black;
+      border-bottom: none;
+      transition: box-shadow .8s ease-in-out;
+      transition: transform .8s ease-in-out; }
+      .catalogPage .catalogList .bookList__image {
+        width: 20%;
+        max-width: 80px; }
+        .catalogPage .catalogList .bookList__image img {
+          width: 100%; }
+      .catalogPage .catalogList .bookList__name {
+        width: 45%; }
+      .catalogPage .catalogList .bookList p {
+        margin-bottom: 0px; }
+      .catalogPage .catalogList .bookList h1 {
+        margin-bottom: 0px;
+        font-size: 20px; }
+      .catalogPage .catalogList .bookList div {
+        align-items: center; }
+      .catalogPage .catalogList .bookList__column {
+        text-align: center;
+        font-size: 20px;
+        width: 15%; }
+        .catalogPage .catalogList .bookList__column hr {
+          height: 2px;
+          background-color: black;
+          border: none;
+          margin: 3px; }
+      .catalogPage .catalogList .bookList__qt {
+        width: 5%;
+        text-align: center;
+        font-size: 25px; }
+    .catalogPage .catalogList .bookList:hover {
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+      transform: scale(1.15);
+      border-bottom: 2px solid black; }
+    .catalogPage .catalogList .bookList:last-child {
+      border-bottom: 2px solid black; }
+
+.backTop {
+  background-color: #583DE8;
+  color: white;
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: center; }
+  .backTop p {
+    line-height: 45px;
+    margin-bottom: 0px;
+    font-size: 20px; }
+
+.backTop:hover {
+  cursor: pointer; }
+
+.bottomFooter {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  margin: 30px auto 0px auto; }
+  .bottomFooter .leftContent h2 {
+    color: white;
+    margin-bottom: 5px;
+    font-size: 30px; }
+  .bottomFooter .leftContent hr {
+    width: 250px;
+    border: none;
+    background-color: #583DE8;
+    height: 2px; }
+  .bottomFooter .leftContent p {
+    margin-top: 10px;
+    color: white;
+    font-size: 18px; }
+  .bottomFooter .rightContent p {
+    color: white;
+    font-size: 18px; }
+  .bottomFooter .rightContent .socialLinks {
+    margin-top: 30px; }
+    .bottomFooter .rightContent .socialLinks img {
+      margin-right: 30px; }
