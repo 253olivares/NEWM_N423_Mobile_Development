@@ -302,6 +302,10 @@ nav {
     width: 90%;
     margin: auto;
     padding-bottom: 50px; }
+    .catalogPage .catalogList a {
+      width: 100%;
+      text-decoration: none;
+      color: black; }
     .catalogPage .catalogList .bookList {
       background-color: #fff;
       min-height: 100px;
@@ -348,6 +352,44 @@ nav {
       border-bottom: 2px solid black; }
     .catalogPage .catalogList .bookList:last-child {
       border-bottom: 2px solid black; }
+
+.bookPage {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column; }
+  .bookPage .nothing {
+    width: 100%;
+    text-align: center; }
+  .bookPage__holder {
+    display: flex;
+    justify-content: center; }
+    .bookPage__holder__images {
+      margin-right: 40px;
+      width: 275px; }
+      .bookPage__holder__images img {
+        width: 100%; }
+    .bookPage__holder__details {
+      width: 500px;
+      display: flex;
+      flex-direction: column; }
+  .bookPage .buttonsPS {
+    margin-top: 60px;
+    justify-content: center;
+    display: flex;
+    gap: 100px; }
+    .bookPage .buttonsPS button {
+      background-color: #7A61FF;
+      color: white;
+      border: none;
+      padding: 5px;
+      width: 200px;
+      font-size: 18px; }
+    .bookPage .buttonsPS button:hover {
+      cursor: pointer; }
 
 .backTop {
   background-color: #583DE8;

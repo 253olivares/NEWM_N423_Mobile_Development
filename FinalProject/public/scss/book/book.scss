@@ -1,0 +1,46 @@
+.bookPage{
+    width: 100%;
+    max-width: 1280px;
+    margin:auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    .nothing{
+        width: 100%;
+        text-align: center;
+    }
+    &__holder{
+        display: flex;
+        justify-content: center;
+        &__images{
+            margin-right: 40px;
+            width: 275px;
+            img{
+                width: 100%;
+            }
+        }
+        &__details{
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .buttonsPS{
+        margin-top: 60px;
+        justify-content: center;
+        display: flex;
+        gap: 100px;
+        button{
+            background-color:#7A61FF;
+            color: white;
+            border: none;
+            padding: 5px;
+            width: 200px;
+            font-size: 18px;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+    }
+}

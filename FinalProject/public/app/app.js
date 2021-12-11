@@ -34,11 +34,43 @@ function signUp() {
   let username = $("#signuserName").val();
   let email = $("#signemail").val();
   let password = $("#signpassword").val();
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      $("#signfullName").val("");
+      $("#signlastName").val("");
+      $("#signuserName").val("");
+      $("#signemail").val("");
+      $("#signpassword").val("");
+      db.collection("USERS")
+        .doc(userCredential.id)
+        .set({
+          name: fName + " " + lName,
+          username: username,
+          id: userCredential.id,
+          email: email,
+        })
+        .then(() => {
+          console.log("Document successfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+      $(".sad").css("display", "");
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+      alert(errorCode + " " + errorMessage);
+    });
 }
 
 //function that runs after our hash that controls objects on our page after load
 //and initializes our database
 function afterRoute(page) {
+  //  initFirebase();
   // initLogin();
   // checkNav();
   switch (page) {
@@ -58,7 +90,7 @@ function afterRoute(page) {
       console.log("you are on the account page!");
       break;
     case "book":
-      // loadSelectBook();
+      loadSelectBook();
       break;
     case "newBook":
       break;
@@ -66,29 +98,77 @@ function afterRoute(page) {
 }
 
 function loadSelectBook() {
-  $(".bookPage").html(`
-  <div class="bookPage__holder">
-  <div class="bookPage__holder__images">
-      <img src="" alt="Communist Manifesto">
-  </div>
-  <div class="bookPage__holder__details"> 
-      <h1></h1>
-      <p>Author: </p>
-      <p>ISBN: </p>
-      <p>DOP: </p>
-      <p>Number of Pages</p>
-      <p>Description: </p>
-      <p>QT: </p>
-  </div>
-</div>
-<div class="buttons">
-  <button onclick="editBook(0)">Edit Book</button>
-  <button onclick="deleteBook(0)">Delete Book</button>
-</div>
-  `);
+  if (bookid == null) {
+    $(".bookPage").html(
+      `<h1 class="nothing">No books were Selected please choose from catalog!</h1>`
+    );
+  } else {
+    if (authorizationAdmin == false) {
+      _db
+        .collection("Books")
+        .doc(`${bookid}`)
+        .get()
+        .then(
+          function (doc) {
+            $(".bookPage").html(`
+          <div class="bookPage__holder">
+          <div class="bookPage__holder__images">
+              <img src="${doc.data().bookImage}" alt="Communist Manifesto">
+          </div>
+          <div class="bookPage__holder__details">
+              <h1>${doc.data().name}</h1>
+              <p>Author: ${doc.data().author}</p>
+              <p>ISBN: ${doc.data().ISBN}</p>
+              <p>DOP:  ${doc.data().dop}</p>
+              <p>Number of Pages: ${doc.data().pages}</p>
+              <p>Description: ${doc.data().description}</p>
+              <p>QT: ${doc.data().qt}</p>
+          </div>
+        </div>
+          `);
+          },
+          function (error) {
+            console.log("Error:", error);
+          }
+        );
+    } else {
+      _db
+        .collection("Books")
+        .doc(`${bookid}`)
+        .get()
+        .then(
+          function (doc) {
+            $(".bookPage").html(`
+          <div class="bookPage__holder">
+          <div class="bookPage__holder__images">
+              <img src="${doc.data().bookImage}" alt="Communist Manifesto">
+          </div>
+          <div class="bookPage__holder__details">
+              <h1>${doc.data().name}</h1>
+              <p>Author: ${doc.data().author}</p>
+              <p>ISBN: ${doc.data().ISBN}</p>
+              <p>DOP:  ${doc.data().dop}</p>
+              <p>Number of Pages: ${doc.data().pages}</p>
+              <p>Description: ${doc.data().description}</p>
+              <p>QT: ${doc.data().qt}</p>
+          </div>
+        </div>
+        <div id="authDis" class="buttonsPS">
+          <button onclick="editBook(${doc.data().id})">Edit Book</button>
+          <button onclick="deleteBook(${doc.data().id})">Delete Book</button>
+        </div>
+          `);
+          },
+          function (error) {
+            console.log("Error:", error);
+          }
+        );
+    }
+  }
 }
 
 function loadBooks(doc) {
+  bookid = "";
   $(".catalogList").empty();
   _db
     .collection("Books")
@@ -97,7 +177,8 @@ function loadBooks(doc) {
       function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           $(".catalogList").append(`
-          <div class="bookList" onclick="loadPick(${doc.data()})">
+          <a href="#/book">
+          <div class="bookList" onclick="loadPick(${doc.data().id})">
           <div class="bookList__image">
               <img src="${doc.data().bookImage}" alt="Book image">
           </div>
@@ -113,6 +194,7 @@ function loadBooks(doc) {
               <p>QT: <span>${doc.data().qt}</span></p>
           </d>
       </div>
+      </a>
           `);
         });
       },
@@ -124,8 +206,7 @@ function loadBooks(doc) {
 
 function loadPick(x) {
   MODEL.changeContent("book", afterRoute);
-  book = x;
-  console.log(x);
+  bookid = x;
 }
 
 function editBook(x) {}
@@ -139,6 +220,7 @@ function checklogin() {
 }
 
 function checkAuth() {
+  console.log("test");
   if (authorizationAdmin == false) {
     $(".addBook").css("display", "");
   } else {
@@ -193,6 +275,9 @@ function route() {
       MODEL.changeContent(pageID, afterRoute);
       break;
     case "account":
+      MODEL.changeContent(pageID, afterRoute);
+      break;
+    case "book":
       MODEL.changeContent(pageID, afterRoute);
       break;
     default:
