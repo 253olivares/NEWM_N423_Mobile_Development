@@ -1,1 +1,12 @@
+Admin login
+Username: Admin 
+Password: Admin123
+
+admin login controls the pages funcionality to add and remove and edit books. 
+Functionalities will be locked by normal users who access page.
+
+Attempted to finish Crud application including as much as possible from proposal.
+
+Failed to incopurate device (ran out of time)
+
 Firebase Hosting Link: https://n423-mo-fa21-e0091.web.app
