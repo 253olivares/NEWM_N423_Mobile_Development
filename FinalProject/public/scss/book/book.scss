@@ -31,6 +31,10 @@
         justify-content: center;
         display: flex;
         gap: 100px;
+        a{
+            text-decoration: none;
+            color: white;
+        }
         button{
             background-color:#7A61FF;
             color: white;

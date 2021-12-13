@@ -4,11 +4,12 @@
             <div class="searchbardiv">
                 <label for="Search">Search: </label>
                 <input title="SearchBar" type="text" name="Search" id="SearchBar">
-                <button><img src="images/search-solid.png" alt="Search"></button>
+                <button onclick="SearchQuere()"><img src="images/search-solid.png" alt="Search"></button>
             </div>
             <div class="genreSearch">
-                <label for="genre">Select a Genre: </label>
-                <select name="genre" id="genre">
+                <label for="genreS">Select a Genre: </label>
+                <select name="genre" id="genreS">
+                    <option value="">None</option>
                     <option value="Action">Action</option>
                     <option value="Adventure">Adventure</option>
                     <option value="Classics">Classics</option>
@@ -17,11 +18,11 @@
                     <option value="Fantasy">Fantasy</option>
                     <option value="Philosophy">Philosophy</option>
                 </select>
-                <button><img src="images/search-solid.png" alt="Search"></button>
+                <button onclick="SearchQuere()"><img src="images/search-solid.png" alt="Search"></button>
             </div>
         </div>
         <div class="addBook">
-            <button class="addBook__daButton">Add Book</button>
+            <a href="#/add"><button class="addBook__daButton">Add Book</button></a>
         </div>
     </div>
     <div class="catalogList">

@@ -1,0 +1,34 @@
+<div class="addPage">
+    <div class="form">
+        <h1>Add Book</h1>
+        <label for="bImage">Book Image: </label>
+        <input type="file" id="bImage" name="bImage" required> 
+        <label for="bName">Book Name: </label>
+        <input type="text" id="bName" name="bName" required>
+        <label for="genreB">Select a Genre: </label>
+                <select name="genre" id="genreB" required>
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Classics">Classics</option>
+                    <option value="history">History</option>
+                    <option value="Comic">Comic book or Graphic Novel</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Philosophy">Philosophy</option>
+                </select>
+        <label for="author">Author: </label>
+        <input type="text" id="author" name="author" required>
+        <label for="isbn">ISBN: </label>
+        <input type="text" id="isbn" name="isbn" required>
+        <label for="column">Column: </label>
+        <input type="text" id="column" name="column" required>
+        <label for="dop">DOP: </label>
+        <input type="text" id="dop" name="dop" required>
+        <label for="nPage">Number of Pages: </label>
+        <input type="text" id="nPage" name="nPage" required>
+        <label for="desc">Description: </label>
+        <textarea type="textarea" style="resize: none;" id="desc" rows="8" name="desc" required></textarea>
+        <label for="qt">QT: </label>
+        <input type="text" id="qt" name="qt" required>
+        <button title="saveBooks" onclick="saveBook()" class="sbook">Save Book</button>
+    </div>
+</div>

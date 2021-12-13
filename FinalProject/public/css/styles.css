@@ -286,6 +286,8 @@ nav {
       display: flex;
       align-items: center;
       display: none; }
+      .catalogPage .topList .addBook a {
+        text-decoration: none; }
       .catalogPage .topList .addBook button {
         padding: 10px;
         font-size: 20px;
@@ -353,6 +355,52 @@ nav {
     .catalogPage .catalogList .bookList:last-child {
       border-bottom: 2px solid black; }
 
+.accountPage {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column; }
+  .accountPage .acc {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px; }
+    .accountPage .acc__images {
+      width: 275px;
+      height: 275px; }
+      .accountPage .acc__images img {
+        height: 100%;
+        width: 100%;
+        border-radius: 100%; }
+  .accountPage button {
+    margin-top: 20px;
+    width: 30%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #583DE8;
+    color: white;
+    border: none; }
+
+.editAccountPage {
+  width: 100%;
+  max-width: 1280px; }
+  .editAccountPage .acced {
+    width: 60%;
+    margin: 60px auto 0px auto; }
+    .editAccountPage .acced label {
+      font-size: 25px; }
+    .editAccountPage .acced input {
+      margin-left: 20px; }
+  .editAccountPage button {
+    margin-top: 40px;
+    margin-left: 20%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #583DE8;
+    color: white;
+    border: none; }
+  .editAccountPage button:hover {
+    cursor: pointer; }
+
 .bookPage {
   width: 100%;
   max-width: 1280px;
@@ -381,6 +429,9 @@ nav {
     justify-content: center;
     display: flex;
     gap: 100px; }
+    .bookPage .buttonsPS a {
+      text-decoration: none;
+      color: white; }
     .bookPage .buttonsPS button {
       background-color: #7A61FF;
       color: white;
@@ -389,6 +440,74 @@ nav {
       width: 200px;
       font-size: 18px; }
     .bookPage .buttonsPS button:hover {
+      cursor: pointer; }
+
+.addPage {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 50px; }
+  .addPage .form {
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px; }
+    .addPage .form h1 {
+      font-size: 40px; }
+    .addPage .form label {
+      padding: 30px 0px 5px 0px; }
+    .addPage .form input {
+      padding: 10px;
+      border: none;
+      border-bottom: 2px solid black; }
+    .addPage .form textarea {
+      padding: 10px;
+      border: 2px solid black; }
+    .addPage .form button {
+      padding: 10px;
+      font-size: 20px;
+      margin-top: 50px;
+      background-color: #583DE8;
+      color: white;
+      border: none; }
+    .addPage .form button:hover {
+      cursor: pointer; }
+
+.editPage {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 50px; }
+  .editPage .emptyHed {
+    padding-top: 100px;
+    text-align: center;
+    width: 100%; }
+  .editPage .formeditBook {
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px; }
+    .editPage .formeditBook h1 {
+      font-size: 40px; }
+    .editPage .formeditBook label {
+      padding: 30px 0px 5px 0px; }
+    .editPage .formeditBook input {
+      padding: 10px;
+      border: none;
+      border-bottom: 2px solid black; }
+    .editPage .formeditBook textarea {
+      padding: 10px;
+      border: 2px solid black; }
+    .editPage .formeditBook button {
+      padding: 10px;
+      font-size: 20px;
+      margin-top: 50px;
+      background-color: #583DE8;
+      color: white;
+      border: none; }
+    .editPage .formeditBook button:hover {
       cursor: pointer; }
 
 .backTop {

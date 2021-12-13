@@ -1,5 +1,7 @@
 //Status Variable that will switch true and false based on what is set in the functions
 var logStatus = false;
+var currentUser;
+var userInfo;
 var authorizationAdmin = false;
 //Initializes database
 var bookid;
@@ -87,6 +89,7 @@ function signUp() {
           username: username,
           id: userCredential.user.uid,
           email: email,
+          password: password,
           cred: "User",
         })
         .then(() => {
@@ -127,14 +130,69 @@ function afterRoute(page) {
     case "account":
       checkLogin();
       break;
-    case "account":
-      console.log("you are on the account page!");
-      break;
     case "book":
       loadSelectBook();
       break;
-    case "newBook":
+    case "add":
       break;
+    case "edit":
+      editBook();
+      break;
+    case "editaccount":
+      editAccount();
+      break;
+  }
+}
+
+function editAccount() {
+  if (currentUser == null) {
+    $(".editAccountPage").html(
+      "<br> <br> <br> <br> <h1>User must be logged into edit information!</h1>"
+    );
+  } else {
+    _db
+      .collection("USERS")
+      .doc(`${userInfo}`)
+      .get()
+      .then(
+        function (doc) {
+          $(".acced").html(`
+          <div class="acced__desc">
+            <div  class="acced__desc__img">
+                <label for="aImage">Account Image: </label>
+                <input type="file" id="aImage" name="aImage">
+            </div>
+            <div class="acced__desc__name">
+                <label for="accName">Account Username: </label>
+                <input type="text" id="accName" value="${
+                  doc.data().username
+                }" name="accName">
+            </div>      
+            <div class="acced__desc__email">
+                <label for="accEmail">Email: </label>
+                <input type="text" id="accEmail" value="${
+                  doc.data().email
+                }" name="accEmail"  disabled>
+            </div>
+            <div class="acced__desc__fn">
+                <label for="accFN">Full Name: </label>
+                <input type="text" id="accFN" value="${
+                  doc.data().name
+                }" name="accFN">
+            </div>
+            <div class="acced__desc__access">
+                <label for="accAccess">Access: </label>
+                <input type="text" id="accAccess" value="${
+                  doc.data().cred
+                }" name="accAccess"  disabled>
+            </div>
+        </div>
+          `);
+        },
+        function (error) {
+          console.log("Error:", error);
+        }
+      );
   }
 }
 
@@ -152,10 +210,11 @@ function loadSelectBook() {
         .get()
         .then(
           function (doc) {
+            console.log(doc.data());
             $(".bookPage").html(`
           <div class="bookPage__holder">
           <div class="bookPage__holder__images">
-              <img src="${doc.data().bookImage}" alt="Communist Manifesto">
+              <img src="${doc.data().bookImage}" alt="Book image">
           </div>
           <div class="bookPage__holder__details">
               <h1>${doc.data().name}</h1>
@@ -180,10 +239,11 @@ function loadSelectBook() {
         .get()
         .then(
           function (doc) {
+            console.log(doc.data());
             $(".bookPage").html(`
           <div class="bookPage__holder">
           <div class="bookPage__holder__images">
-              <img src="${doc.data().bookImage}" alt="Communist Manifesto">
+            <img src="${doc.data().bookImage}" alt="Book image">
           </div>
           <div class="bookPage__holder__details">
               <h1>${doc.data().name}</h1>
@@ -196,7 +256,7 @@ function loadSelectBook() {
           </div>
         </div>
         <div id="authDis" class="buttonsPS">
-          <button onclick="editBook(${doc.data().id})">Edit Book</button>
+          <a href="#/edit"><button>Edit Book</button></a>
           <button onclick="deleteBook(${doc.data().id})">Delete Book</button>
         </div>
           `);
@@ -252,21 +312,394 @@ function loadPick(x) {
   MODEL.changeContent("book", afterRoute);
   bookid = x;
 }
+//function that grabs information from add page and pushes it to the database
+function saveBook() {
+  let bookImage = $("#bImage").prop("files")[0];
+  let setID = 0;
+  _db
+    .collection("Books")
+    .get()
+    .then(function (data) {
+      setID = data.size + 1;
+    });
+
+  if (bookImage !== null) {
+    let storageRef = firebase.storage().ref();
+    let imageFile = $("#bImage").prop("files")[0];
+    let image = storageRef.child(imageFile.name);
+    const metadata = { contentType: imageFile.type };
+    let date = Date.parse(new Date());
+    let genreB = $("#genreB").val();
+    let bName = $("#bName").val();
+    let author = $("#author").val();
+    let isbn = $("#isbn").val();
+    let column = $("#column").val();
+    let dop = $("#dop").val();
+    let nPage = $("#nPage").val();
+    let desc = $("#desc").val();
+    let qt = $("#qt").val();
+    _db = firebase.firestore();
+    const task = storageRef
+      .child("images/" + date + imageFile.name)
+      .put(imageFile, metadata);
+    task
+      .then((snapshot) => snapshot.ref.getDownloadURL())
+      .then((url) => {
+        let userObj = {
+          ISBN: isbn,
+          author: author,
+          bookImage: url,
+          column: column,
+          description: desc,
+          dop: dop,
+          genre: genreB,
+          id: setID,
+          name: bName,
+          pages: nPage,
+          qt: qt,
+        };
+        _db
+          .collection("Books")
+          .doc(`${setID}`)
+          .set(userObj)
+          .then(function (doc) {
+            console.log("book has been added");
+            alert("Book has been sucesfully added!");
+            window.location.hash = "#/catalog";
+          });
+      })
+      .catch((error) => {});
+  }
+}
 
 // function to take to edit page that will edit the book
-function editBook(x) {}
+function editBook() {
+  if (bookid == null) {
+    $(".editPage").html(
+      `<br> <br> <br> <br> <br> <h1 class="emptyHed">No book is selected!</h1>`
+    );
+  } else {
+    if (authorizationAdmin == false) {
+      $(".editPage").html(
+        `<br> <br> <br> <br> <br> <h1 class="emptyHed">Please be logged in as a adminstrator to edit this page!</h1>`
+      );
+    } else {
+      _db
+        .collection("Books")
+        .doc(`${bookid}`)
+        .get()
+        .then(function (doc) {
+          $(".formeditBook").html(`<h1>Update Book</h1>
+          <label for="bImageB">Book Image: </label>
+          <input type="file" id="bImageB" name="bImage">
+          <label for="bNameB">Book Name: </label>
+          <input type="text" id="bNameB" value="${
+            doc.data().name
+          }" name="bName">
+          <label for="genreB">Select a Genre: </label>
+                  <select name="genre" id="genreBE" >
+                      <option value="Action">Action</option>
+                      <option value="Adventure">Adventure</option>
+                      <option value="Classics">Classics</option>
+                      <option value="history">History</option>
+                      <option value="Comic">Comic book or Graphic Novel</option>
+                      <option value="Fantasy">Fantasy</option>
+                      <option value="Philosophy">Philosophy</option>
+                  </select>
+          <label for="authorB">Author: </label>
+          <input type="text" id="authorB" value="${
+            doc.data().author
+          }"  name="author">
+          <label for="isbnB">ISBN: </label>
+          <input type="text" id="isbnB" value="${doc.data().ISBN}" name="isbn">
+          <label for="columnB">Column: </label>
+          <input type="text" id="columnB" value="${
+            doc.data().column
+          }"  name="column">
+          <label for="dopB">DOP: </label>
+          <input type="text" id="dopB"  value="${doc.data().dop}" name="dop">
+          <label for="nPageB">Number of Pages: </label>
+          <input type="text" id="nPageB"value="${
+            doc.data().pages
+          }"  name="nPage">
+          <label for="descB">Description: </label>
+          <textarea type="textarea" style="resize: none;" id="descB" rows="8" name="desc">${
+            doc.data().description
+          }</textarea>
+          <label for="qtB">QT: </label>
+          <input type="text" id="qtB" value="${doc.data().qt}"  name="qt">
+          <button title="saveBooks" onclick="saveChanges(${
+            doc.data().id
+          })" class="sbook">Save Changes</button>`);
+          document.getElementById("genreBE").value = doc.data().genre;
+        });
+    }
+  }
+}
+
+function saveChanges(x) {
+  let bookImage = $("#bImageB").prop("files");
+  console.log(bookImage);
+  if (bookImage.length !== 0) {
+    let storageRef = firebase.storage().ref();
+    let imageFile = $("#bImageB").prop("files")[0];
+    let image = storageRef.child(imageFile.name);
+    const metadata = { contentType: imageFile.type };
+    let date = Date.parse(new Date());
+    let genreB = $("#genreBE").val();
+    let bName = $("#bNameB").val();
+    let author = $("#authorB").val();
+    let isbn = $("#isbnB").val();
+    let column = $("#columnB").val();
+    let dop = $("#dopB").val();
+    let nPage = $("#nPageB").val();
+    let desc = $("#descB").val();
+    let qt = $("#qtB").val();
+    _db = firebase.firestore();
+    const task = storageRef
+      .child("images/" + date + imageFile.name)
+      .put(imageFile, metadata);
+    task
+      .then((snapshot) => snapshot.ref.getDownloadURL())
+      .then((url) => {
+        imgFile = url;
+        _db.collection("Books").doc(`${x}`).update({
+          ISBN: isbn,
+          author: author,
+          bookImage: imgFile,
+          column: column,
+          description: desc,
+          dop: dop,
+          genre: genreB,
+          name: bName,
+          pages: nPage,
+          qt: qt,
+        });
+      })
+      .catch((error) => {});
+  } else {
+    let genreB = $("#genreBE").val();
+    let bName = $("#bNameB").val();
+    let author = $("#authorB").val();
+    let isbn = $("#isbnB").val();
+    let column = $("#columnB").val();
+    let dop = $("#dopB").val();
+    let nPage = $("#nPageB").val();
+    let desc = $("#descB").val();
+    let qt = $("#qtB").val();
+    console.log(bName);
+    _db.collection("Books").doc(`${x}`).update({
+      name: bName,
+      ISBN: isbn,
+      author: author,
+      description: desc,
+      dop: dop,
+      column: column,
+      genre: genreB,
+      pages: nPage,
+      qt: qt,
+    });
+  }
+
+  alert("Book has been sucesfully updated!");
+  window.location.hash = "#/catalog";
+}
+
+function saveUserChanges() {
+  let userImage = $("#aImage").prop("files");
+  if (userImage.length !== 0) {
+    let storageRef = firebase.storage().ref();
+    let imageFile = $("#aImage").prop("files")[0];
+    let image = storageRef.child(imageFile.name);
+    const metadata = { contentType: imageFile.type };
+    let date = Date.parse(new Date());
+    let acName = $("#accName").val();
+    let acFN = $("#accFN").val();
+    _db = firebase.firestore();
+    const task = storageRef
+      .child("images/" + date + imageFile.name)
+      .put(imageFile, metadata);
+    task
+      .then((snapshot) => snapshot.ref.getDownloadURL())
+      .then((url) => {
+        imgFile = url;
+        _db.collection("USERS").doc(`${userInfo}`).update({
+          images: imgFile,
+          name: acFN,
+          username: acName,
+        });
+      })
+      .catch((error) => {});
+  } else {
+    let acName = $("#accName").val();
+    let acFN = $("#accFN").val();
+    _db.collection("USERS").doc(`${userInfo}`).update({
+      name: acFN,
+      username: acName,
+    });
+  }
+  alert("Account has been sucesfully updated!");
+  window.location.hash = "#/account";
+}
 
 // function to delete book
-function deleteBook(x) {}
+function deleteBook(x) {
+  console.log(x);
+  _db
+    .collection("Books")
+    .doc(`${x}`)
+    .delete()
+    .then(() => {
+      console.log("Document successfully deleted!");
+      alert("Book has been sucesfully deleted!");
+      window.location.hash = "#/catalog";
+    })
+    .catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+}
+
+function SearchQuere() {
+  let searchName = $("#SearchBar").val();
+  let searchGenre = $("#genreS").val();
+  if (searchName !== "") {
+    if (searchGenre == "") {
+      $(".catalogList").empty();
+      _db
+        .collection("Books")
+        .where("name", "==", searchName)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            $(".catalogList").append(`
+          <a href="#/book">
+          <div class="bookList" onclick="loadPick(${doc.data().id})">
+          <div class="bookList__image">
+              <img src="${doc.data().bookImage}" alt="Book image">
+          </div>
+          <div class="bookList__name">
+              <h1>${doc.data().name}</h1>
+          </div>
+          <div class="bookList__column">
+              <p class="bookList__column__label">Column</p>
+              <hr>
+              <p class="bookList__column__dynamic">${doc.data().column}</p>
+          </div>
+          <d iv class="bookList__qt">
+              <p>QT: <span>${doc.data().qt}</span></p>
+          </d>
+      </div>
+      </a>
+          `);
+          });
+        });
+      alert("Query search finished");
+    } else {
+      $(".catalogList").empty();
+      _db
+        .collection("Books")
+        .where("name", "==", searchName)
+        .where("genre", "==", searchGenre)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            $(".catalogList").append(`
+          <a href="#/book">
+          <div class="bookList" onclick="loadPick(${doc.data().id})">
+          <div class="bookList__image">
+              <img src="${doc.data().bookImage}" alt="Book image">
+          </div>
+          <div class="bookList__name">
+              <h1>${doc.data().name}</h1>
+          </div>
+          <div class="bookList__column">
+              <p class="bookList__column__label">Column</p>
+              <hr>
+              <p class="bookList__column__dynamic">${doc.data().column}</p>
+          </div>
+          <d iv class="bookList__qt">
+              <p>QT: <span>${doc.data().qt}</span></p>
+          </d>
+      </div>
+      </a>
+          `);
+          });
+        });
+      alert("Query search finished");
+    }
+  } else {
+    if (searchGenre == "") {
+      alert("No search queries requested!");
+      window.location.hash = "#/catalog";
+    } else {
+      $(".catalogList").empty();
+      _db
+        .collection("Books")
+        .where("genre", "==", searchGenre)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            $(".catalogList").append(`
+          <a href="#/book">
+          <div class="bookList" onclick="loadPick(${doc.data().id})">
+          <div class="bookList__image">
+              <img src="${doc.data().bookImage}" alt="Book image">
+          </div>
+          <div class="bookList__name">
+              <h1>${doc.data().name}</h1>
+          </div>
+          <div class="bookList__column">
+              <p class="bookList__column__label">Column</p>
+              <hr>
+              <p class="bookList__column__dynamic">${doc.data().column}</p>
+          </div>
+          <d iv class="bookList__qt">
+              <p>QT: <span>${doc.data().qt}</span></p>
+          </d>
+      </div>
+      </a>
+          `);
+          });
+        });
+      alert("Query search finished");
+    }
+  }
+}
 
 // function to check login on account page to see if a user is loged in
 function checkLogin() {
+  console.log(userInfo);
   switch (logStatus) {
     case true:
-      $(".accountPage").html("<h1>User is logged in!</h1>");
+      _db
+        .collection("USERS")
+        .doc(`${userInfo}`)
+        .get()
+        .then(function (doc) {
+          $(".acc").html(`
+          <div class="acc__images">
+          <img src="${doc.data().images}" alt="accountImage">
+      </div>
+      <div class="acc__desc">
+          <div class="acc__desc__name">
+              <p>Account Name: ${doc.data().username}</p>
+          </div>      
+          <div class="acc__desc__email">
+              <p>Email: ${doc.data().email}</p>
+          </div>
+          <div class="acc__desc__fn">
+              <p>Full Name: ${doc.data().name}</p>
+          </div>
+          <div class="acc__desc__access">
+              <p>Access: ${doc.data().cred}</p>
+          </div>
+      </div>`);
+        });
       break;
     case false:
-      $(".accountPage").html("<h1>No user is logged in!</h1>");
+      $(".accountPage").html(
+        "<br> <br> <br> <br> <br><h1>No user is logged in!</h1>"
+      );
       break;
   }
 }
@@ -309,9 +742,12 @@ function initFirebase() {
             switch (doc.data().cred) {
               case "Admin":
                 authorizationAdmin = true;
+                $(".addBook").css("display", "flex");
                 break;
             }
-            checkAuth();
+            logStatus = true;
+            currentUser = doc.data().cred;
+            userInfo = doc.data().username;
           });
         })
         .catch((error) => {
@@ -322,13 +758,15 @@ function initFirebase() {
       $(".logout").css("display", "block");
       $(".home").css("display", "block");
       $(".catalog").css("display", "block");
-      logStatus = true;
     } else {
+      $(".addBook").css("display", "");
       $(".navElements").css("display", "none");
       $(".lsnav").css("display", "block");
       $(".home").css("display", "block");
       $(".catalog").css("display", "block");
       checkAuth();
+      currentUser = "";
+      userInfo = "";
       logStatus = false;
     }
   });
@@ -351,6 +789,15 @@ function route() {
       MODEL.changeContent(pageID, afterRoute);
       break;
     case "book":
+      MODEL.changeContent(pageID, afterRoute);
+      break;
+    case "add":
+      MODEL.changeContent(pageID, afterRoute);
+      break;
+    case "edit":
+      MODEL.changeContent(pageID, afterRoute);
+      break;
+    case "editaccount":
       MODEL.changeContent(pageID, afterRoute);
       break;
     default:
