@@ -36,5 +36,51 @@ nav{
                 text-decoration: none;
             }
         }
+        .mobileNav{
+            display: none;
+        }
+    }
+}
+@media screen and (max-width: 1300px){
+    nav{
+        .holder{
+            .pageTitle{
+                h1{
+                    font-size: 30px;
+                }
+            }
+            .pageNav{
+                display: flex;
+                .lsnav:hover{
+
+                }
+                .logout:hover{
+                   
+                }
+                a{
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 650px){
+    nav{
+        .holder{
+            .pageTitle{
+                h1{
+                    font-size: 30px;
+                }
+            }
+            .pageNav{
+                display: none;
+            }
+            .mobileNav{
+                display: block;
+                img{
+                    fill: #fff;
+                }
+            }
+        }
     }
 }

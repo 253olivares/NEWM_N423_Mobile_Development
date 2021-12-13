@@ -10,8 +10,10 @@
         margin: auto;
         .filters{
             display: flex;
+            flex-wrap: wrap;
         }
         .searchbardiv{
+            flex-wrap: wrap;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -42,6 +44,7 @@
         }
         .genreSearch{
             display: flex;
+            flex-wrap: wrap;
             justify-content: flex-start;
             align-items: center;
             label{
@@ -158,5 +161,32 @@
         .bookList:last-child {
             border-bottom: 2px solid black;
           }
+    }
+}
+@media screen and (max-width: 850px){
+    .catalogPage{
+        .catalogList{
+            .bookList{
+                &__image{
+                    width: 20%;
+                    max-width: 50px;
+                    img{
+                        width: 100%;
+                    }
+                }
+                h1{
+                    margin-bottom: 0px;
+                    font-size: 15px;
+                }
+                &__column{
+                    font-size: 15px;
+                }
+                &__qt{
+                    width: 5%;
+                    text-align: center;
+                    font-size: 18px;
+                }
+            }
+        }
     }
 }

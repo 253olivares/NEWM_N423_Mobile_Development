@@ -3,6 +3,7 @@ var logStatus = false;
 var currentUser;
 var userInfo;
 var authorizationAdmin = false;
+var checkNav = false;
 //Initializes database
 var bookid;
 //Database
@@ -557,6 +558,14 @@ function deleteBook(x) {
     .catch((error) => {
       console.error("Error removing document: ", error);
     });
+}
+
+function mobileNav() {
+  if (checkNav == false) {
+    checkNav = true;
+  } else {
+    checkNav = false;
+  }
 }
 
 function SearchQuere() {

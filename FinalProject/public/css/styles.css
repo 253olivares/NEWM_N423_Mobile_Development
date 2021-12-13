@@ -205,6 +205,26 @@ nav {
         font-size: 25px;
         color: white;
         text-decoration: none; }
+    nav .holder .mobileNav {
+      display: none; }
+
+@media screen and (max-width: 1300px) {
+  nav .holder .pageTitle h1 {
+    font-size: 30px; }
+  nav .holder .pageNav {
+    display: flex; }
+    nav .holder .pageNav a {
+      font-size: 15px; } }
+
+@media screen and (max-width: 650px) {
+  nav .holder .pageTitle h1 {
+    font-size: 30px; }
+  nav .holder .pageNav {
+    display: none; }
+  nav .holder .mobileNav {
+    display: block; }
+    nav .holder .mobileNav img {
+      fill: #fff; } }
 
 .homePage {
   width: 100%;
@@ -236,8 +256,10 @@ nav {
     width: 90%;
     margin: auto; }
     .catalogPage .topList .filters {
-      display: flex; }
+      display: flex;
+      flex-wrap: wrap; }
     .catalogPage .topList .searchbardiv {
+      flex-wrap: wrap;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -262,6 +284,7 @@ nav {
         cursor: pointer; }
     .catalogPage .topList .genreSearch {
       display: flex;
+      flex-wrap: wrap;
       justify-content: flex-start;
       align-items: center; }
       .catalogPage .topList .genreSearch label {
@@ -354,6 +377,22 @@ nav {
       border-bottom: 2px solid black; }
     .catalogPage .catalogList .bookList:last-child {
       border-bottom: 2px solid black; }
+
+@media screen and (max-width: 850px) {
+  .catalogPage .catalogList .bookList__image {
+    width: 20%;
+    max-width: 50px; }
+    .catalogPage .catalogList .bookList__image img {
+      width: 100%; }
+  .catalogPage .catalogList .bookList h1 {
+    margin-bottom: 0px;
+    font-size: 15px; }
+  .catalogPage .catalogList .bookList__column {
+    font-size: 15px; }
+  .catalogPage .catalogList .bookList__qt {
+    width: 5%;
+    text-align: center;
+    font-size: 18px; } }
 
 .accountPage {
   margin-top: 60px;
@@ -527,10 +566,12 @@ nav {
 
 .bottomFooter {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
   max-width: 1280px;
-  margin: 30px auto 0px auto; }
+  margin: 30px auto 0px auto;
+  padding: 0px 30px 0px 30px; }
   .bottomFooter .leftContent h2 {
     color: white;
     margin-bottom: 5px;
@@ -551,3 +592,21 @@ nav {
     margin-top: 30px; }
     .bottomFooter .rightContent .socialLinks img {
       margin-right: 30px; }
+
+@media screen and (max-width: 800px) {
+  .bottomFooter .leftContent h2 {
+    font-size: 15px; }
+  .bottomFooter .leftContent hr {
+    width: 125px; }
+  .bottomFooter .leftContent p {
+    font-size: 10px; }
+  .bottomFooter .rightContent p {
+    font-size: 13px; } }
+
+@media screen and (max-width: 550px) {
+  .bottomFooter .leftContent h2 {
+    font-size: 15px; }
+  .bottomFooter .leftContent p {
+    font-size: 13px; }
+  .bottomFooter .rightContent p {
+    font-size: 13px; } }
