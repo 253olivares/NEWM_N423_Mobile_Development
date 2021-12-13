@@ -1,3 +1,8 @@
+Private Shelf CRUD application to record Book information and display catalog showig location of book
+Users can use application to search for books and find information about them.
+Application features to add remove and edit books is locked behind administrator access
+Users can also create account and update username, fullName, and account image to customize their profile
+
 Admin login
 Username: Admin 
 Password: Admin123
@@ -8,5 +13,6 @@ Functionalities will be locked by normal users who access page.
 Attempted to finish Crud application including as much as possible from proposal.
 
 Failed to incopurate device (ran out of time)
+Failed to incorpurate google and twitter login.
 
 Firebase Hosting Link: https://n423-mo-fa21-e0091.web.app
